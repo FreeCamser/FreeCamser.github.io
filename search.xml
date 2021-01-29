@@ -1307,9 +1307,9 @@
       </tags>
   </entry>
   <entry>
-    <title>重出江湖</title>
+    <title>New Start</title>
     <url>/2021/01/09/%E9%87%8D%E5%87%BA%E6%B1%9F%E6%B9%96/</url>
-    <content><![CDATA[<p>时隔两年重出江湖，继续追寻网络安全的梦！</p>
+    <content><![CDATA[<p>大学毕业后工作一年，幡然醒悟，觉得还是需要去考研，于是依然投入考研事业，期待一个新的开始。</p>
 ]]></content>
       <categories>
         <category>杂记</category>
@@ -1366,6 +1366,21 @@
       </categories>
       <tags>
         <tag>安全协议</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode编程训练(array)</title>
+    <url>/2021/01/29/LeetCode%E7%BC%96%E7%A8%8B%E8%AE%AD%E7%BB%83-array/</url>
+    <content><![CDATA[<p>为了提高编程和算法水平，便加入了LeetCode的行列，学习练习提高水平。<br>本文是关于array专题的题解总结。</p>
+<h2 id="67-二进制求和"><a href="#67-二进制求和" class="headerlink" title="67. 二进制求和"></a>67. 二进制求和</h2><p>给你两个二进制字符串，返回它们的和（用二进制表示）。<br>输入为 非空 字符串且只包含数字 1 和 0。<br>示例 1:<br>输入: a = “11”, b = “1”<br>输出: “100</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>1.保持输入的两个字符串长度一致，通过while判断，添加’0’<br>2.根据字符的ASCII码，’0’-‘0’=0，’0’+1=’1’<br>3.如果相加大于2，需要对2取余加’0’，并进位<br>4.最后对首位进行判断</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string addBinary(string a, string b) &#123;</span><br><span class="line">        while(a.length()&gt;b.length())&#123;</span><br><span class="line">            b&#x3D;&#39;0&#39;+b;</span><br><span class="line">        &#125;</span><br><span class="line">        while(a.length()&lt;b.length())&#123;</span><br><span class="line">            a&#x3D;&#39;0&#39;+a;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i&#x3D;a.length()-1;i&gt;0;i--)&#123;</span><br><span class="line">            a[i]&#x3D;a[i]-&#39;0&#39;+b[i];</span><br><span class="line">            if(a[i]-&#39;0&#39;&gt;&#x3D;2)&#123;</span><br><span class="line">                a[i]&#x3D;(a[i]-&#39;0&#39;)%2+&#39;0&#39;;</span><br><span class="line">                a[i-1]&#x3D;a[i-1]+1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        a[0]&#x3D;a[0]-&#39;0&#39;+b[0];</span><br><span class="line">        if(a[0]-&#39;0&#39;&gt;&#x3D;2)&#123;</span><br><span class="line">            a[0]&#x3D;(a[0]-&#39;0&#39;)%2+&#39;0&#39;;</span><br><span class="line">            a&#x3D;&#39;1&#39;+a;</span><br><span class="line">        &#125;</span><br><span class="line">        return a;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>
