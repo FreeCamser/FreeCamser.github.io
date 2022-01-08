@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="一个小白进阶的历程">
+    <meta name="author" content="Camser">
+    
+    <title>
+        
+            CSS基础学习3.0 |
+        
+        Camser&#39;s Blog
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-Hans"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Misaka.jpg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.0"};
+    KEEP.language_ago = undefined;
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Camser&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">CSS基础学习3.0</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Misaka.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Camser</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2018-03-07 14:22:10
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/CSS/">CSS</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><blockquote>
+<p>我们可以把页面中的元素都可以看做一个盒子，占据着一定的页面空间，这些占据的空间往往比单纯的内容要大，换句话说，我们可以调整盒子的边框和距离的参数来调节盒子的位置。</p>
+</blockquote>
+<p><img src="/uploads/2.png" alt="图片"></p>
+<blockquote>
+<p>一个盒子的宽度（或高度）是由content+padding+border+margin，并且对于任何一个盒子，都可以分别设定4条边各自的border、padding、margin。因此我们可以利用好盒子的这些属性，就能很好的实现各种各样的排班效果。</p>
+</blockquote>
+<h3 id="border"><a href="#border" class="headerlink" title="border"></a>border</h3><blockquote>
+<p>border的属性主要有3个，分别为color、width、style，通常在设置border时常常将三个属性进行很好的配合，才能达到良好的效果。</p>
+</blockquote>
+<ul>
+<li>代码示例<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">div&#123;</span><br><span class="line">border-width:6px;</span><br><span class="line">border-color:#000000;</span><br><span class="line">margin:20px; padding:5px;</span><br><span class="line">background-color:#FFFFCC;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div style=&quot;border-style: dashed;&quot;&gt;no1&lt;/div&gt;</span><br><span class="line">&lt;div style=&quot;border-style: dotted;&quot;&gt;no2&lt;/div&gt;</span><br><span class="line">&lt;div style=&quot;border-style: double;&quot;&gt;no3&lt;/div&gt;</span><br><span class="line">&lt;div style=&quot;border-style: solid;&quot;&gt;no4&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="padding"><a href="#padding" class="headerlink" title="padding"></a>padding</h3></li>
+</ul>
+<blockquote>
+<p>padding用于控制content和border之间的距离</p>
+</blockquote>
+<p><img src="/uploads/3.png" alt="图片"></p>
+<ul>
+<li>代码示例<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.outside&#123;</span><br><span class="line">	padding:10px 30px 50px 100px; /*同时设置，顺时针，上右下左*/</span><br><span class="line">	border:1px solid #000000;/*外边框*/</span><br><span class="line">	background-color:#fffcd3;/*外背景*/</span><br><span class="line">&#125;</span><br><span class="line">.inside&#123;</span><br><span class="line">	background-color:#66b2ff;/*内背景*/</span><br><span class="line">	border:1px solid #005dbc;/*内边框*/</span><br><span class="line">	width:100%;line-height:40px;</span><br><span class="line">	text-align:center;</span><br><span class="line">	font-family:Arial;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;outside&quot;&gt;</span><br><span class="line">&lt;div class=&quot;inside&quot;&gt;padding&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="margin"><a href="#margin" class="headerlink" title="margin"></a>margin</h3><blockquote>
+<p>margin指的是元素与元素之间的距离</p>
+</blockquote>
+<p><img src="/uploads/4.png" alt="图片"></p>
+<ul>
+<li><p>代码示例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">span&#123;</span><br><span class="line">	background-color:#a2d2ff;</span><br><span class="line">	text-align:center;</span><br><span class="line">	font-family:Arial,Helvetica,sans-serif;</span><br><span class="line">	font-size:12px;</span><br><span class="line">	padding:10px;</span><br><span class="line">&#125;</span><br><span class="line">span.left&#123;</span><br><span class="line">	margin-right:30px;</span><br><span class="line">	background-color:#a9d6ff;</span><br><span class="line">&#125;</span><br><span class="line">span.right&#123;</span><br><span class="line">	margin-left:40px;</span><br><span class="line">	background-color:#eeb0b0;</span><br><span class="line">&#125;</span><br><span class="line">div&#123;</span><br><span class="line">	background-color:#a2d2ff;</span><br><span class="line">	text-align:center;</span><br><span class="line">	font-family:Arial,Helvetica,sans-serif;</span><br><span class="line">	font-size:12px;</span><br><span class="line">	padding:10px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;span class=&quot;left&quot;&gt;行内元素1&lt;/span&gt;&lt;span class=&quot;right&quot;&gt;行内元素2&lt;/span&gt; /*行级元素距离30+40=70px*/</span><br><span class="line">&lt;div style=&quot;margin-bottom: 50px；&quot;&gt;块元素1&lt;/div&gt;</span><br><span class="line">&lt;div style=&quot;margin-top: 30px；&quot;&gt;块元素2&lt;/div&gt; /*块级元素距离是两者之种较大者，50px*/</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>margin除了设置正数以外，也可以设置为负数，当设置为负数时，会使得块向反方向移动，甚至覆盖在另外的块上。</p>
+</li>
+<li><p>当块之间是父子关系，通过设置子块的margin为负数，可以使得子块从父块中”分离”出来</p>
+</li>
+</ul>
+<h2 id="元素定位"><a href="#元素定位" class="headerlink" title="元素定位"></a>元素定位</h2><h3 id="float"><a href="#float" class="headerlink" title="float"></a>float</h3><blockquote>
+<p>1.网页中各种元素都必须有自己的位置，从而搭建出整个页面的结构。在这里我们介绍使用CSS的float、position和z-index属性来进行块元素的定位。<br>2.float定位是CSS排版中重要的手段。属性float的值很简单，可以设置为left、right或者默认值none，当设置了元素向左或向右浮动时，元素会向其父元素的左侧或右侧靠近</p>
+</blockquote>
+<ul>
+<li>代码示例<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">body&#123;</span><br><span class="line">	margin:15px;</span><br><span class="line">	font-family:Arial;</span><br><span class="line">	font-size:12px;</span><br><span class="line">&#125;</span><br><span class="line">.father&#123;</span><br><span class="line">	background-color:#fffea6;</span><br><span class="line">	border:1px solid #111111;</span><br><span class="line">	padding:25px;</span><br><span class="line">&#125;</span><br><span class="line">.son1&#123;</span><br><span class="line">	padding:10px;</span><br><span class="line">	margin:5px;</span><br><span class="line">	background-color:#70baff;</span><br><span class="line">	border:1px dashed #111111;</span><br><span class="line">	float:left;  /*与不加float的对比一下看看有何不同*/</span><br><span class="line">&#125;</span><br><span class="line">.son2&#123;</span><br><span class="line">	padding:5px;</span><br><span class="line">	margin:0px;</span><br><span class="line">	background-color:#ffd270;</span><br><span class="line">	border:1px dashed #111111;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;father&quot;&gt;</span><br><span class="line">&lt;div class=&quot;son1&quot;&gt;float1&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;son2&quot;&gt;float2&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>1.当son1设置了float之后，son1的宽度仅仅是它的内容本身加上自己的padding，对于父容器而言它已经不属于父块了，所以在其下面的son2会上来，它内部的内容围绕在son1周围，并且保持着son1所设置的margin距离。</p>
+</blockquote>
+</li>
+</ul>
+<p>2.倘若将子块son1与子块son2都向左浮，并且给son2添加内容变会发现子块son2不再环绕son1。</p>
+<blockquote>
+<p>当设置了float时，经常会遇见重叠的现象，导致压在底层的不能显示出来，那么在CSS中可以通过设置块元素的clear属性来清理对float的影响，主要可以设置一下三个值，left、right、both。</p>
+</blockquote>
+<h3 id="position"><a href="#position" class="headerlink" title="position"></a>position</h3><blockquote>
+<p>position定位与float一样，也是CSS排版中非常重要的概念。position从字面意思上看就是制定块的位置。即块相对于其父块的位置和相对他自身应该在的位置。</p>
+</blockquote>
+<ul>
+<li>代码示例<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#block&#123;</span><br><span class="line">	background-color: #fff0ac;</span><br><span class="line">	border:1px dashed #000000;</span><br><span class="line">	padding:10px;</span><br><span class="line">	position:absolute; /* absolute绝对定位*/</span><br><span class="line">	left:20px; /*块的左边框离页面左边界20px */</span><br><span class="line">	top:40px; /* 块的上边框离页面上边界40px*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>1.当将子块的position设置为absolute时，子块已经不再属于父块，其左边框设置的距离是相对页面body的距离，而不是父块的距离。</p>
+</blockquote>
+</li>
+</ul>
+<p>2.当将块的position参数设置为relative时，与将其设置为absolute时完全不同，这时子块是相对于自身在父块的原先位置来进行定位的。<br>3.将子块position属性设置为relative时，子块仍然属于其父块，只是相对于自己在父块中的原先位置有了移动改变。</p>
+<h3 id="z-index"><a href="#z-index" class="headerlink" title="z-index"></a>z-index</h3><blockquote>
+<p>z-index属性用于调整定位时重叠块的上下位置，当块设置了position属性时，该值便可设置各块之间的重叠高低关系，默认值为0.</p>
+</blockquote>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2018/03/14/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CNN%E7%AE%97%E6%B3%95/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">神经网络NN算法</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2018/02/26/CSS%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A02-0/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">CSS基础学习2.0</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Camser</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.0</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="一个小白进阶的历程">
+    <meta name="author" content="Camser">
+    
+    <title>
+        
+            安全协议知识点汇总 |
+        
+        Camser&#39;s Blog
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-Hans"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Misaka.jpg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.0"};
+    KEEP.language_ago = undefined;
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Camser&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">安全协议知识点汇总</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Misaka.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Camser</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2018-07-05 19:30:56
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE/">安全协议</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="Foundation"><a href="#Foundation" class="headerlink" title="Foundation"></a>Foundation</h2><h3 id="Authentication-Integrity-and-Nonrepudiation-认证性，完整性，非否任性"><a href="#Authentication-Integrity-and-Nonrepudiation-认证性，完整性，非否任性" class="headerlink" title="Authentication, Integrity, and Nonrepudiation(认证性，完整性，非否任性)"></a>Authentication, Integrity, and Nonrepudiation(认证性，完整性，非否任性)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">认证性：确定消息的真实来源</span><br><span class="line">完整性：验证消息在传输中未被修改</span><br><span class="line">非否任性：发送方不能在他发送消息后抵赖</span><br><span class="line"></span><br><span class="line">1.Authentication: Ascertaining a message’s true origin</span><br><span class="line">2.Integrity: Verifying that a message has not been modified in transit</span><br><span class="line">3.Nonrepudiation: A sender should not be able to falsely deny later that he sent a message</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Protocol-Building-Blocks"><a href="#Protocol-Building-Blocks" class="headerlink" title="Protocol Building Blocks"></a>Protocol Building Blocks</h2><h3 id="Types-of-Security-Protocols-安全协议类型"><a href="#Types-of-Security-Protocols-安全协议类型" class="headerlink" title="Types of Security Protocols(安全协议类型)"></a>Types of Security Protocols(安全协议类型)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">1.仲裁协议,即协议涉及可信第三方</span><br><span class="line">	例: </span><br><span class="line">	1.Alice将凭证交予可信第三方</span><br><span class="line">	2.Bob将支票交给Alice</span><br><span class="line">	3.Alice使用支票</span><br><span class="line">	4.当Alice使用完支票后，可信第三方将凭证交给Bob。否则将凭证还给Alice</span><br><span class="line">2.裁决协议,有可信第三方，但是用于事后判决</span><br><span class="line">	例: </span><br><span class="line">	无仲裁子协议(每次执行):</span><br><span class="line">	1.Bob和Alice商议合约</span><br><span class="line">	2.Alice在合约上签字</span><br><span class="line">	3.Bob在合约上签字</span><br><span class="line">	仲裁子协议(存在争议时执行):</span><br><span class="line">	1.Bob和Alice同时来到仲裁者前</span><br><span class="line">	2.Alice出示证据</span><br><span class="line">	3.Bob出示证据</span><br><span class="line">	4.仲裁者根据证据进行决策</span><br><span class="line">3.自执行协议,没有可信第三方</span><br><span class="line">	没有对可信第三方的要求</span><br><span class="line">	协议本身必须保证公平性</span><br><span class="line">	一方可以检测对方是否试图作弊，因此，可以立即停止。</span><br><span class="line">	不幸的是，没有一个自执行协议可以针对所有情况</span><br><span class="line"></span><br><span class="line">1.Arbitrated protocols: Involving a trusted third party</span><br><span class="line">	Alice gives title to lawyer</span><br><span class="line">	Bob gives check to Alice</span><br><span class="line">	Alice deposits check</span><br><span class="line">	Lawyer gives title to Bob if check gets cleared within a specific time; otherwise lawyer returns title back to 	Alice </span><br><span class="line"></span><br><span class="line">2.Adjudicated protocols: Trusted third party, after the fact</span><br><span class="line">	(1) Non-arbitrated subprotocol (executed every time):</span><br><span class="line">		Alice and Bob negotiate the terms of the contract</span><br><span class="line">		Alice signs the contract</span><br><span class="line">		Bob signs the contract</span><br><span class="line">	(2) Adjudicated subprotocol (executed only in case of a dispute):</span><br><span class="line">		Alice and Bob appear before a judge</span><br><span class="line">		Alice presents her evidence</span><br><span class="line">		Bob presents his evidence</span><br><span class="line">		The judge rules on the evidence		</span><br><span class="line"></span><br><span class="line">3.Self-enforcing protocols: No trusted third party</span><br><span class="line">	No arbitrator required</span><br><span class="line">	Protocol itself guarantees fairness</span><br><span class="line">	A party can detect whether other party is trying to cheat and therefore, can stop immediately</span><br><span class="line">	</span><br><span class="line">	Unfortunately, there is not a self-enforcing protocol for every situation</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Attacks-Against-Protocols-攻击协议"><a href="#Attacks-Against-Protocols-攻击协议" class="headerlink" title="Attacks Against Protocols(攻击协议)"></a>Attacks Against Protocols(攻击协议)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">密码攻击</span><br><span class="line">	攻击协议中使用的加密算法</span><br><span class="line">	攻击用于实现算法和协议的加密技术</span><br><span class="line">	攻击协议本身</span><br><span class="line">被动攻击</span><br><span class="line">	窃听部分或全部协议</span><br><span class="line">主动攻击</span><br><span class="line">	介绍新消息，删除消息，中断，更改，回复</span><br><span class="line">被动欺骗</span><br><span class="line">	遵循协议，但尝试获取更多信息</span><br><span class="line">主动欺骗</span><br><span class="line">	在尝试作弊时中断正在进行的协议</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Cryptographic attacks</span><br><span class="line">	Attacks against cryptographic algorithms used in protocols</span><br><span class="line">	Attacks against cryptographic techniques used to implement the algorithms and protocols</span><br><span class="line">	Attacks against the protocols themselves</span><br><span class="line">Passive attacks</span><br><span class="line">	Eavesdrop on some or all of the protocol</span><br><span class="line">Active attacks</span><br><span class="line">	Introduce new messages, delete messages, interrupt, alter, reply</span><br><span class="line">Passive cheaters</span><br><span class="line">	Follow protocol, but try to obtain more info</span><br><span class="line">Active cheaters</span><br><span class="line">	Disrupt protocol in progress in an attempt to cheat</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Security-Properties-安全属性"><a href="#Security-Properties-安全属性" class="headerlink" title="Security Properties(安全属性)"></a>Security Properties(安全属性)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">机密性：数据仅供获得授权的人使用。</span><br><span class="line">完整性：未经授权的实体不能更改数据。</span><br><span class="line">认证证：数据确实来自声称的发件人。</span><br><span class="line">非否认性：实体不能否认他们承诺发送的数据。</span><br><span class="line">新鲜度：Nonce是不可猜测的，永远不会重复使用。</span><br><span class="line">公平性</span><br><span class="line"></span><br><span class="line">Confidentiality: Data is available only to those authorized to obtain it.</span><br><span class="line">Integrity: Data has not been altered by unauthorised entities.</span><br><span class="line">Authentication: Data has indeed originated from the purported sender.</span><br><span class="line">Non-repudiation: Entities cannot deny sending data they have committed to.</span><br><span class="line">Freshness: Nonces are unguessable, and never re-used.</span><br><span class="line">Fairness</span><br></pre></td></tr></table></figure>
+<h3 id="Dolev-Yao-threat-model"><a href="#Dolev-Yao-threat-model" class="headerlink" title="Dolev-Yao threat model"></a>Dolev-Yao threat model</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">对于分布式系统和网络，我们经常应该假设有敌人</span><br><span class="line">	网络中的任何地方</span><br><span class="line">	对手可能会做：窃听，操纵，注入，改变，复制，重改路由等......</span><br><span class="line">	攻击者可以控制地理上分离的大量网络节点</span><br><span class="line"></span><br><span class="line">Dolev-Yao威胁模型代表攻击者可以偷听，拦截和综合任何消息，并且仅受所使用的加密方法的限制。</span><br><span class="line"></span><br><span class="line">For distributed systems and networks, we often should assume that there are adversaries</span><br><span class="line">	Everywhere in the network</span><br><span class="line">	Adversary may: eavesdrop, manipulate, inject, alter, duplicate, reroute, etc…</span><br><span class="line">	Adversary may control a large number of network nodes that are geographically separated</span><br><span class="line"></span><br><span class="line">The Dolev-Yao threat model represents an attacker that can overhear, intercept, and synthesise any message and is only limited by the constraints of the cryptographic methods used. </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Man-in-the-Middle"><a href="#Man-in-the-Middle" class="headerlink" title="Man-in-the-Middle"></a>Man-in-the-Middle</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在中间人攻击中，攻击者进入实际协议的中间。</span><br><span class="line"></span><br><span class="line">In a Man-in-the-Middle attack the attacker gets in the middle of a real run of a protocol.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Basic-Protocols"><a href="#Basic-Protocols" class="headerlink" title="Basic Protocols"></a>Basic Protocols</h2><h3 id="secret-splitting-秘密分割"><a href="#secret-splitting-秘密分割" class="headerlink" title="secret splitting(秘密分割)"></a>secret splitting(秘密分割)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Trent要保护消息m,生成一个随机位串r,长度和m相等.</span><br><span class="line">计算m异或r=s</span><br><span class="line">给Alice r</span><br><span class="line">给Bob s</span><br><span class="line">为了重新得到m，需要Alice和Bob一起用r异或s得到m.</span><br><span class="line">可以扩展到n个人</span><br><span class="line"> m xor r xor s xor t = u</span><br><span class="line"> </span><br><span class="line">Assume Trent wishes to protect the message m:</span><br><span class="line">Trent generates a random bit string r, the same length m.</span><br><span class="line">Trent computes m xor r = s</span><br><span class="line">Trent gives Alice r</span><br><span class="line">Trent gives Bob s</span><br><span class="line">	Each of the pieces is called a shadow.</span><br><span class="line">	To reconstruct m, Alice and Bob XOR their shadows together.</span><br><span class="line">	If r is truly random, the system is perfectly secure (OTP).</span><br><span class="line">	To extend the scheme to n people, generate n random bit strings e.g. m xor r xor s xor t = u</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="secret-sharing-秘密共享"><a href="#secret-sharing-秘密共享" class="headerlink" title="secret sharing(秘密共享)"></a>secret sharing(秘密共享)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">门限秘密共享</span><br><span class="line">目标是将秘密K划分为n个s1 ,. 。 。 sn以这样一种方式：</span><br><span class="line">	任何一组m个或更多用户都可以共同获取秘密;任何m个或更多个si片段的知识使K易于计算。</span><br><span class="line">	任何一组m-1或更少的用户都不能共同获得有关该秘密的任何信息。知道任何m-1或更少的si片叶K完全未确定。</span><br><span class="line"></span><br><span class="line">根据m和n的选择提供安全性和可靠性之间的权衡。</span><br><span class="line">	m越高，安全性越高，可靠性越低</span><br><span class="line">	较低的m提供较低的安全性，较高的可靠</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> Threshold Secret Sharing</span><br><span class="line"></span><br><span class="line">The goal is to divide a secret K into n pieces s1, . . . sn in such a  way that:</span><br><span class="line">	Any group of m or more users can jointly obtain the secret; knowledge of any m or more si pieces makes K easily computable.</span><br><span class="line">	Any group of m-1 or less users cannot jointly obtain any information about the secret. Knowledge of any m-1 or 	fewer si pieces leaves K completely undetermined.</span><br><span class="line"></span><br><span class="line">Provides tradeoff between security and reliability according to the choice of m and n.</span><br><span class="line">	Higher m gives higher security, lower reliability</span><br><span class="line">	Lower m gives lower security, higher reliability</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">shamir（m，n）门限方案</span><br><span class="line">基于多项式插值，以及m个点（x，y）唯一地定义m-1次多项式y = f（x）的事实。</span><br><span class="line">Trent希望在n个用户之间分发消息k，其中任何m个用户组都可以恢复k。</span><br><span class="line"></span><br><span class="line">shamir’s (m,n) threshold scheme</span><br><span class="line"></span><br><span class="line">Based on polynomial interpolation, and the fact that a polynomial y=f(x) of degree m-1 is uniquely defined by m points (x,y).</span><br><span class="line">Trent wishes to distribute message k amongst n users, where any group of m users can recover k.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Threshold-Cryptography-门限密码学"><a href="#Threshold-Cryptography-门限密码学" class="headerlink" title="Threshold Cryptography(门限密码学)"></a>Threshold Cryptography(门限密码学)</h3><p>公钥是公开的，但相应的私钥在多方之间共享.</p>
+<p>A public key is published, but the corresponding<br>private key is shared among multiple parties.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">门限加密方案</span><br><span class="line">	使用公钥加密消息</span><br><span class="line">	为了解密密文，需要超过阈值的多方参与解密协议。</span><br><span class="line">门限签名方案</span><br><span class="line">	为了签署消息，需要超过阈值的多方参与签名协议。</span><br><span class="line">	可以使用公钥验证签名。</span><br><span class="line"></span><br><span class="line">Threshold Encryption Scheme </span><br><span class="line">	A message is encrypted using the public key</span><br><span class="line">	In order to decrypt a ciphertext, a number of parties exceeding a threshold is required to cooperate in the decryption protocol. </span><br><span class="line">Threshold Signature Scheme </span><br><span class="line">	To sign a message, a number of parties exceeding a threshold is required to cooperate in the signing protocol. </span><br><span class="line">	A signature can be verified using the public key.  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="subliminal-channels-阈下信道"><a href="#subliminal-channels-阈下信道" class="headerlink" title="subliminal channels(阈下信道)"></a>subliminal channels(阈下信道)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Alice和Bob在他们的消息中建立了一个阈下信道（也称为隐蔽通信信道）。</span><br><span class="line">在最简单的层面上，Alice和Bob可以使用隐写术，即stego（信息隐藏）。注意stego不是加密（虽然你可以将两者结合起来）。</span><br><span class="line"></span><br><span class="line">Alice and Bob set up a subliminal channel in their message (otherwise known as a covert communications channel).</span><br><span class="line">On the simplest level, Alice and Bob could use steganography aka stego (information hiding). Note stego is not crypto (although you can combine the two).</span><br></pre></td></tr></table></figure>
+
+<h3 id="bit-commitment-位承诺"><a href="#bit-commitment-位承诺" class="headerlink" title="bit commitment(位承诺)"></a>bit commitment(位承诺)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">简单的例子:</span><br><span class="line">决定游戏中谁获胜</span><br><span class="line">如果Bob猜的正确，则他获胜</span><br><span class="line">Alice选择一位(0/1),并且把它锁在一个盒子里</span><br><span class="line">Bob猜测一下</span><br><span class="line">打开盒子验证是否正确</span><br><span class="line">两个部分:</span><br><span class="line">承诺、揭幕</span><br><span class="line">必须确保:</span><br><span class="line">Bob猜测后，Alice无法改变她的数据</span><br><span class="line">在Alice选中一位时，Bob不知道她的数据.</span><br><span class="line"></span><br><span class="line">Simplest example:</span><br><span class="line">	Decide who goes first in a game</span><br><span class="line">	If Bob guesses correctly, he goes</span><br><span class="line">	Alice picks a bit (0 or 1) and locks it in a box</span><br><span class="line">	Bob guesses a bit</span><br><span class="line">	The box is opened to see if he is right</span><br><span class="line">Two parts:</span><br><span class="line">	Commitment</span><br><span class="line">	Unveiling</span><br><span class="line">Must ensure that:</span><br><span class="line">	Alice cannot change her bit after Bob guesses</span><br><span class="line">	Bob cannot know what Alice’s bit is until she unveils it</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Fair-Coin-Flips-公平的硬币抛掷"><a href="#Fair-Coin-Flips-公平的硬币抛掷" class="headerlink" title="Fair Coin Flips(公平的硬币抛掷)"></a>Fair Coin Flips(公平的硬币抛掷)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">基本方法：</span><br><span class="line">Alice选择随机位b并通过位承诺方案提交给它（给Bob）</span><br><span class="line">鲍勃试图猜测这个位并将他的猜测发送给爱丽丝</span><br><span class="line">爱丽丝向鲍勃透露了比特b</span><br><span class="line">他们都知道Bob是否猜对了</span><br><span class="line"></span><br><span class="line">Basic approach:</span><br><span class="line">	Alice selects a random bit b and commits to it (to Bob) via a bit commitment scheme</span><br><span class="line">	Bob tries to guess the bit and sends his guess to Alice</span><br><span class="line">	Alice reveals the bit b to Bob</span><br><span class="line">	They both know if Bob guessed correctly</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="mental-poker-智力扑克"><a href="#mental-poker-智力扑克" class="headerlink" title="mental poker(智力扑克)"></a>mental poker(智力扑克)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Alice和Bob使用可交换的公钥密码系统</span><br><span class="line"></span><br><span class="line">DA（EB（EA（m）））= EB（m）</span><br><span class="line"></span><br><span class="line">Alice使用她的公钥加密52条消息m1 =（“黑桃王牌”，r1）......</span><br><span class="line">Alice将blob发送给Bob。</span><br><span class="line">Bob为Alice选择5张牌并将其发送给她。</span><br><span class="line">Bob为自己选择5，用他的公钥加密并将它们发送给Alice。</span><br><span class="line">Alice用她的公钥解密消息并发回Bob。</span><br><span class="line">Bob解密消息以确定他的手。</span><br><span class="line">在比赛结束时，Alice和Bob展示了他们的密钥对，以确保不会作弊。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Alice and Bob use a commutative public key cryptosystem</span><br><span class="line"></span><br><span class="line">DA(EB(EA(m))) = EB(m)</span><br><span class="line"></span><br><span class="line">Alice encrypts 52 messages m1 = (“Ace of Spades”, r1) … using her public key.</span><br><span class="line">Alice sends the blobs to Bob. </span><br><span class="line">Bob chooses 5 cards for Alice and sends them to her.</span><br><span class="line">Bob picks 5 for himself, encrypts with his public key and sends them back to Alice. </span><br><span class="line">Alice decrypts the messages with her public key and sends back to Bob.</span><br><span class="line">Bob decrypts the messages to determine his hand.</span><br><span class="line">At the end of the game, Alice and Bob reveal their key pairs to ensure neither cheats.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Key-Escrow-密钥托管"><a href="#Key-Escrow-密钥托管" class="headerlink" title="Key Escrow(密钥托管)"></a>Key Escrow(密钥托管)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Micali的公平密码系统</span><br><span class="line">将私钥分成n个部分，并将每个部分分发给不同的可信部门</span><br><span class="line">可以在不重建私钥的情况下验证每个部分的正确性</span><br><span class="line">如果需要，法院命令可以授权执法机关从受托人那里收集n件并构建私钥</span><br><span class="line"></span><br><span class="line">Micali’s Fair Cryptosystem</span><br><span class="line">	Break up the private key into n pieces and distribute each piece to different trusted authorities</span><br><span class="line">	Each piece can be verified for correctness without reconstructing the private key</span><br><span class="line">	If needed, court order can authorize law enforcement authorities to gather n pieces from trustees and construct the private key </span><br><span class="line"></span><br><span class="line">Alice创建了她的私钥/公钥对。她将私钥分成几个公共部分和私人部分</span><br><span class="line">Alice向每个受托人发送公共部分和相应的私人作品。这些消息必须加密。她还将公钥发送给KDC</span><br><span class="line">每个受托人独立地对其公共部分及其私人部分进行计算，以确保其正确性。每个受托人将私人作品存放在安全的地方，并将公共部分发送给KDC</span><br><span class="line">KDC对公共部分和公钥执行另一次计算以确保正确性。然后它签署公钥并将其发送回Alice或在某个地方的数据库中发布。</span><br><span class="line"></span><br><span class="line">Key Escrow Protocol</span><br><span class="line">	Alice creates her private/public key pair. She splits the private key into several public pieces and private pieces</span><br><span class="line">	Alice sends a public piece and corresponding private piece to each of the trustees. These messages must be encrypted. She also sends the public key to the KDC</span><br><span class="line">	Each trustee, independently, performs a calculation on its public piece and its private piece for correctness. Each trustee  stores the private piece somewhere secure and sends the public piece to the KDC</span><br><span class="line">	KDC performs another calculation on the public pieces and the public key for correctness. It then signs the public key and either sends it back to Alice or posts it in a database somewhere.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="oblivious-transfer-不经意传输"><a href="#oblivious-transfer-不经意传输" class="headerlink" title="oblivious transfer(不经意传输)"></a>oblivious transfer(不经意传输)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">明显的转移是Alice可以以这样的方式向Bob发送秘密的方式，即Bob以概率0.5接收秘密并且Alice不知道它是否被接收。 （即“我有一个秘密，你得到的概率为0.5”）。</span><br><span class="line"></span><br><span class="line">这可以扩展到“我有两个秘密，你得到一个”“我有n个秘密，你得到一个”，等等。</span><br><span class="line"></span><br><span class="line">明显的转移并不是单独使用的。 它在其他协议中用作构建块。</span><br><span class="line"></span><br><span class="line">Obvious transfer is a way Alice can send a secret to Bob in such a way that Bob receives the secret with probability 0.5 and Alice does not know if it is received or not. (i.e. “I have one secret and you get it with probability 0.5”).</span><br><span class="line"></span><br><span class="line">This can be extended to “I have two secrets and you get one” “I have n secrets and you get one”, etc.</span><br><span class="line"></span><br><span class="line">Obvious transfer is not used alone. It is used as a building block in other protocols.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Authentication-protocols-认证协议"><a href="#Authentication-protocols-认证协议" class="headerlink" title="Authentication protocols(认证协议)"></a>Authentication protocols(认证协议)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Alice必须向Bob证明自己的身份，同时也可以要求Bob证明自己的身份(相互认证).</span><br><span class="line">可能需要建立会话密钥，也有其他要求，如使用公钥、使用对称密钥、使用哈希函数.</span><br><span class="line"></span><br><span class="line">Alice must prove her identity to Bob</span><br><span class="line">	Alice and Bob can be humans or computers</span><br><span class="line">May also require Bob to prove he’s Bob (mutual authentication)</span><br><span class="line">May also need to establish a session key</span><br><span class="line">May have other requirements, such as</span><br><span class="line">	Use only public keys</span><br><span class="line">	Use only symmetric keys</span><br><span class="line">	Use only a hash function</span><br><span class="line">	Anonymity, plausible deniability, etc., etc.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Method-of-Session-Key-Generation-会话密钥生成方法"><a href="#Method-of-Session-Key-Generation-会话密钥生成方法" class="headerlink" title="Method of Session Key Generation(会话密钥生成方法)"></a>Method of Session Key Generation(会话密钥生成方法)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">密钥传输协议：一个用户创建或获取秘密值并将其安全地传输给其他用户</span><br><span class="line">密钥协商协议：会话密钥是所有协议用户输入的函数。</span><br><span class="line">混合协议：会话密钥是多个主体的输入函数，但不是所有用户的输入函数。</span><br><span class="line"></span><br><span class="line">Key Transport Protocol: one user creates or obtains a secret value and securely transfers it to the other users</span><br><span class="line">Key Agreement Protocol: the session key is a function of inputs by all protocol users.</span><br><span class="line">Hybrid Protocol: the session key is a function of inputs by more than one principal, but not by all users.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Additional-Security-Attributes-其他安全属性"><a href="#Additional-Security-Attributes-其他安全属性" class="headerlink" title="Additional Security Attributes(其他安全属性)"></a>Additional Security Attributes(其他安全属性)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">已知（会话）密钥安全性：协议运行应该产生唯一的秘密会话密钥。 如果此密钥被泄露，它应该对其他会话密钥没有影响。</span><br><span class="line">前向安全：即使长期私钥被泄露，也不会对先前建立的会话密钥的保密性产生任何影响。</span><br><span class="line"></span><br><span class="line">Known (Session) Key Security:A protocol run should result in a unique secret session key. If this key is compromised, it should have no impact on other session keys.</span><br><span class="line">Forward Secrecy: Even if long-term private keys are compromised, it should not have any effect on the secrecy of previously established session keys. </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Zero-knowledge-proof-零知识证明"><a href="#Zero-knowledge-proof-零知识证明" class="headerlink" title="Zero-knowledge proof(零知识证明)"></a>Zero-knowledge proof(零知识证明)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Peggy想要向Victor证明她有一些有价值的信息，但她根本不想向Victor透露它</span><br><span class="line">零知识证明是“证明者”可以向“验证者”证明拥有某条信息而不泄露它的一种方式。</span><br><span class="line">加密协议研究的核心工具</span><br><span class="line"></span><br><span class="line">Peggy wants to prove to Victor that she has a piece of valuable information but she does not want to reveal it to Victor at all</span><br><span class="line">A zero-knowledge proof is a way that a “prover” can prove possession of a certain piece of information to a “verifier” without revealing it.</span><br><span class="line">Central tool in study of cryptographic protocols</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Graph-Isomorphism-图同构"><a href="#Graph-Isomorphism-图同构" class="headerlink" title="Graph Isomorphism(图同构)"></a>Graph Isomorphism(图同构)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">假设Peggy知道，图G1和G2是同构的，并且想要说服Victor知道她的知识</span><br><span class="line">协议:</span><br><span class="line">1.Peggy随机置换G1以产生图H，与G1同构。 找到G1和H之间或H和G2之间的同构与寻找G1和G2之间的同构一样困难</span><br><span class="line">2.Peggy把H送给了Victor</span><br><span class="line">3.Victor要求Peggy要么：</span><br><span class="line">	证明H和G1是同构的，或者</span><br><span class="line">	H和G2是同构的</span><br><span class="line">4.Peggy遵守。 她要么：</span><br><span class="line">	证明H和G1是同构的，没有证明H和G2是同构的，或者</span><br><span class="line">	证明H和G2是同构的，没有证明H和G1是同构的</span><br><span class="line">5.Peggy和Victor重复步骤（1）到（4）n次</span><br><span class="line">注意，在每一轮中，Victor接收一个新的H随机排列，以及H与G1或G2之间的同构</span><br><span class="line"></span><br><span class="line">Assume that Peggy knows, graphs G1 and G2 are isomorphic and wants to convince Victor of her knowledge</span><br><span class="line">Protocol</span><br><span class="line">	1.Peggy randomly permutes G1 to produce a graph H, isomorphic to G1. Finding an isomorphism between G1 and H or between H and G2 is just as hard as finding an isomorphism between G1 and G2</span><br><span class="line">	2.Peggy sends H to Victor</span><br><span class="line">	3.Victor asks Peggy either to:</span><br><span class="line">		Prove that H and G1 are isomorphic, or</span><br><span class="line">		that H and G2 are isomorphic</span><br><span class="line">	4.Peggy complies. She either:</span><br><span class="line">		Proves that H and G1 are isomorphic, without proving that H and G2 are isomorphic, or</span><br><span class="line">		Proves that H and G2 are isomorphic, without proving that H and G1 are isomorphic</span><br><span class="line">	5.Peggy and Victor repeat steps (1) through (4) n times</span><br><span class="line">Notice, in each round, Victor receives a new random permutation of H, along with an isomorphism between H and either G1 or G2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Hamilton回路"><a href="#Hamilton回路" class="headerlink" title="Hamilton回路"></a>Hamilton回路</h3><p>在图论中，图G中的回路是指始点和终点相重合的路径，若回路通过图的每个顶点一次且仅一次，则称图G为哈密尔顿回路，构造图G的哈密尔顿回路是NPC问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">假定P知道图G的哈密尔顿回路，并希望向V证明这一事实，则：</span><br><span class="line">（1）P随机地构造一个与图G同构的图W,并将W交给V</span><br><span class="line">（2）V随机的要求P做下述两件工作之一：</span><br><span class="line">1.证明图G和图W同构</span><br><span class="line">2.指出图W的一条哈密尔顿回路</span><br><span class="line">（3）P根据要求做下述两件工作之一：</span><br><span class="line">1.证明图G和图W同构，但不能指出图G或者图W的哈密尔顿回路</span><br><span class="line">2.指出图W的哈密尔顿回路，但不证明图G和图W同构</span><br><span class="line">（4）P和V重复以上过程n次</span><br></pre></td></tr></table></figure>
+
+<h2 id="Digital-Signature-variant-数字签名变种"><a href="#Digital-Signature-variant-数字签名变种" class="headerlink" title="Digital Signature variant(数字签名变种)"></a>Digital Signature variant(数字签名变种)</h2><h3 id="Blind-Signatures-盲签名"><a href="#Blind-Signatures-盲签名" class="headerlink" title="Blind Signatures(盲签名)"></a>Blind Signatures(盲签名)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">概念</span><br><span class="line">所谓盲签名就是指签名人只是完成对文件的签名工作，并不了解所签文件的内容</span><br><span class="line">而平常的签名内容，都是签名者对所签内容是知道的</span><br><span class="line"></span><br><span class="line">特点</span><br><span class="line">（1）签名者不知道所签署的数据内容</span><br><span class="line">（2）在签名被签名申请者泄露后，签名者不能追踪签名</span><br><span class="line"></span><br><span class="line">步骤</span><br><span class="line">（1）申请者对待签名文件进行盲化</span><br><span class="line">（2）签名者对文件签名</span><br><span class="line">（3）申请者将签名后文件去盲，即可得到原始数据的签名</span><br><span class="line"></span><br><span class="line">假设我们希望人们在没有看到内容的情况下签署文档</span><br><span class="line"></span><br><span class="line">Suppose we want people to sign documents without ever seeing their contents</span><br></pre></td></tr></table></figure>
+
+<h3 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h3><p><img src="/uploads/aqxy.png" alt="1"></p>
+<h3 id="Partially-Blind-Signatures-部分盲签名"><a href="#Partially-Blind-Signatures-部分盲签名" class="headerlink" title="Partially Blind Signatures(部分盲签名)"></a>Partially Blind Signatures(部分盲签名)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">概念</span><br><span class="line">“部分”意味着待签名的消息是由签名申请方和签名方共同生成的</span><br><span class="line">即待签名消息包括签名申请者提交的待签名消息和签名者提供的”身份消息”</span><br><span class="line"></span><br><span class="line">改进</span><br><span class="line">允许签名者添加一些诸如签名时间、签名有效期和对签署消息性质的说明性信息等内容</span><br><span class="line">1.保证了待签消息对签名者的盲性</span><br><span class="line">2.阻止了签名申请者提供非法信息而滥用签名</span><br><span class="line">3.有效的保护了签名者的合法权益</span><br></pre></td></tr></table></figure>
+
+<h3 id="Fair-Blind-Signatures-公平盲签名"><a href="#Fair-Blind-Signatures-公平盲签名" class="headerlink" title="Fair Blind Signatures(公平盲签名)"></a>Fair Blind Signatures(公平盲签名)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">概念</span><br><span class="line">可以在需要的时候让一个可信任第三方发布信息，允许签名人把消息——签名对和签名时的具体内容联系起来，实现对签名申请人的追踪</span><br><span class="line"></span><br><span class="line">新特性</span><br><span class="line">引入可信中心，通过可信中心的授权，签名者可追踪签名</span><br><span class="line">在需要的时候让一个可信任第三方发布信息，允许签名人把消息——签名对和他签名时候的具体内容联系起来，揭开签名，实现对签名申请者的追踪</span><br></pre></td></tr></table></figure>
+<h3 id="Digital-Signature-Scheme-Based-on-multiple-hard-problems-基于多重数学难题的数字签名方案"><a href="#Digital-Signature-Scheme-Based-on-multiple-hard-problems-基于多重数学难题的数字签名方案" class="headerlink" title="Digital Signature Scheme Based on multiple hard problems(基于多重数学难题的数字签名方案)"></a>Digital Signature Scheme Based on multiple hard problems(基于多重数学难题的数字签名方案)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">为什么我们需要一个基于多个难题的密码系统？</span><br><span class="line"></span><br><span class="line">因子分解问题的假设很难。</span><br><span class="line">离散对数问题的假设很难。</span><br><span class="line">更强烈的假设是</span><br><span class="line">多个加密假设不太可能同时变得容易解决。</span><br><span class="line"></span><br><span class="line">Why we need a cryptosystem based on multiple hard problems?</span><br><span class="line"></span><br><span class="line">The assumption of factoring problem is it being hard.</span><br><span class="line">The assumption of discrete logarithm problem is it being hard.</span><br><span class="line">More strong assumption is that</span><br><span class="line">it is very unlikely that multiple cryptographic assumptions would simultaneously become easy to solve.</span><br></pre></td></tr></table></figure>
+<h3 id="Proxy-Signature-代理签名"><a href="#Proxy-Signature-代理签名" class="headerlink" title="Proxy Signature(代理签名)"></a>Proxy Signature(代理签名)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">原始签名者将他/她的签名能力委托给代理签名者（向代理签名者发出代理密钥对）</span><br><span class="line">代理签名者使用代理密钥对代表原始签名者签名消息</span><br><span class="line">接收者一起验证签名本身和原始签名者的委托</span><br><span class="line"></span><br><span class="line">An original signer delegates his/her signing capability to a proxy signer (issues a proxy key pair to proxy signer)</span><br><span class="line">Proxy signer signs a message on behalf of the original signer using the proxy key pair</span><br><span class="line">A receiver verifies the signature itself and original signer’s delegation together </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Group-Signatures-群签名"><a href="#Group-Signatures-群签名" class="headerlink" title="Group Signatures(群签名)"></a>Group Signatures(群签名)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在群签名方案中，群的成员可以代表群进行签名，签名可用单一的群公开密钥验证。一旦消息被签名，除了指定的群管理者，没有人能够确定该签名是哪个特定的群成员签署的。群签名应该保证没有其他成员能够对于给定的消息伪造另一个成员的签名。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Ring-signatures-环签名"><a href="#Ring-signatures-环签名" class="headerlink" title="Ring signatures(环签名)"></a>Ring signatures(环签名)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">环签名方案是一种没有管理者的类群签名方案，环中任何一个成员都可以代表整个环进行签名，而验证者只知道签名来自这个环，但不知道谁才是真正的签名者。</span><br></pre></td></tr></table></figure>
+
+<h2 id="Non-repudiation-protocol-非否认签名"><a href="#Non-repudiation-protocol-非否认签名" class="headerlink" title="Non-repudiation protocol(非否认签名)"></a>Non-repudiation protocol(非否认签名)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">非否认性。 提供个人保护，防止另一个人从未发生过通信的虚假声明</span><br><span class="line">甲方希望以可验证的方式将消息M转发给乙方</span><br><span class="line">A和B希望非否认令牌证明有关邮件传输的某些事实</span><br><span class="line"></span><br><span class="line">Non-repudiation. Offers a person protection against a false claim by another person that a communication never took place</span><br><span class="line">Party A wants to transfer a message M to party B in a verifiable way</span><br><span class="line">A and B want non-repudiation tokens to prove certain facts about the message transfer</span><br><span class="line"></span><br><span class="line">发送方非否认:防止消息的发送者拒绝发送消息</span><br><span class="line">接受方非否认:防止接收人拒绝收到邮件</span><br><span class="line"></span><br><span class="line">Non-repudiation of origin (NRO): to prevent the originator of a message from denying having sent the message</span><br><span class="line">Non-repudiation of receipt (NRR): to prevent the recipient of a message from denying having received the message</span><br><span class="line"></span><br><span class="line">EOO - B发送方非否认证据：证明A已发送消息M.</span><br><span class="line">EOR - A接收方非否认证据：证明B已收到消息M.</span><br><span class="line"></span><br><span class="line">EOO – Evidence of origin for B: Proves that A has sent message M.</span><br><span class="line">EOR – Evidence of receipt for A: Proves that B has received message M.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="TTP’s-involvement"><a href="#TTP’s-involvement" class="headerlink" title="TTP’s involvement"></a>TTP’s involvement</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">内联TTP。 在协议期间涉及每个消息传输的TTP被称为内联。</span><br><span class="line">在线TTP。 在协议的每个会话期间涉及但在每个消息的传输期间不涉及的TTP被称为在线。</span><br><span class="line">离线TTP。 仅在虚假实体出现错误行为或在网络错误的情况下涉及协议的TTP，才能脱机。</span><br><span class="line"></span><br><span class="line">Inline TTP. A TTP involved in each message’s transmission during the protocol, is said to be inline. </span><br><span class="line">Online TTP. A TTP involved during each session of the protocol but not during each message’s transmission, is said to be online. </span><br><span class="line">Offline TTP. A TTP involved in a protocol only in case of an incorrect behavior of a dishonest entity or in case of a network error, issaid to be offline. </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Zhou-Gollmann-protocol"><a href="#Zhou-Gollmann-protocol" class="headerlink" title="Zhou-Gollmann protocol"></a>Zhou-Gollmann protocol</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.A发送密文c=Ek(m)、标签l、接受者名字B的签名。</span><br><span class="line">B使用这个信息作为A在协议标识l下发送了Ek(m)的证据</span><br><span class="line">2.B使用一个签名作为响应，表示在协议标识l下接收到了Ek(m)。</span><br><span class="line">A将使用这个信息作为B在协议标识l下接收到了Ek(m)的证据</span><br><span class="line">3.A接着把密钥K与协议标识l发送给可信服务器。</span><br><span class="line">如果A进行欺骗而发送一个错误的密钥K’，他就不能得到他需要的证据，因为Ek(m)与K’不能提供证据说明A发送了m。</span><br><span class="line">4和5中，A与B都可以从可信第三方获取密钥</span><br><span class="line"></span><br><span class="line">最后，A可以证明B对消息m的正确性负责，且B可以证明A对消息m的正确性负责</span><br></pre></td></tr></table></figure>
+
+<h2 id="Fair-Exchange-Protocols-公平交换协议"><a href="#Fair-Exchange-Protocols-公平交换协议" class="headerlink" title="Fair Exchange Protocols(公平交换协议)"></a>Fair Exchange Protocols(公平交换协议)</h2><h3 id="Probabilistic-Contract-Signing-概率签合同"><a href="#Probabilistic-Contract-Signing-概率签合同" class="headerlink" title="Probabilistic Contract Signing(概率签合同)"></a>Probabilistic Contract Signing(概率签合同)</h3><p><img src="/uploads/aqxy2.png" alt="1"></p>
+<h2 id="Secure-elections-安全选举"><a href="#Secure-elections-安全选举" class="headerlink" title="Secure elections(安全选举)"></a>Secure elections(安全选举)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">投票议定书的要求</span><br><span class="line"></span><br><span class="line">只有授权选民才能投票。</span><br><span class="line">没有人可以多次投票。</span><br><span class="line">没有人可以复制任何其他人的投票。</span><br><span class="line">没有人可以在不被发现的情况下改变别人的投票。</span><br><span class="line">每个选民都可以确保在最终制表中考虑到他的投票。</span><br><span class="line">没有人能确定其他人投票给谁。</span><br><span class="line">每个人都知道谁投票，谁没投票。</span><br><span class="line"></span><br><span class="line">Requirements for Voting Protocol</span><br><span class="line"></span><br><span class="line">Only authorized voters can vote.</span><br><span class="line">No one can vote more than once.</span><br><span class="line">No one can duplicate anyone else’s vote.</span><br><span class="line">No one can change anyone else’s vote without being discovered.</span><br><span class="line">Every voter can make sure that his vote has been taken into account in the final tabulation.</span><br><span class="line">No one can determine for whom anyone else voted.</span><br><span class="line">Everyone knows who voted and who didn’t.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Digital-Cash-数字现金"><a href="#Digital-Cash-数字现金" class="headerlink" title="Digital Cash(数字现金)"></a>Digital Cash(数字现金)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">支票和信用卡减少了实物现金流量，但有审计跟踪</span><br><span class="line">数字现金</span><br><span class="line">	匿名，无法追踪</span><br><span class="line">	一次性用于购买或转让或更改（不可复制）</span><br><span class="line">数字现金协议非常复杂</span><br><span class="line"></span><br><span class="line">Checks and credit cards have reduced the amount of physical cash flow but have an audit trail</span><br><span class="line">Digital cash</span><br><span class="line">	Anonymous, untraceable </span><br><span class="line">	One time use for purchase or transfer or change (cannot be copied)</span><br><span class="line">Digital cash protocols are very complex</span><br><span class="line"></span><br><span class="line">关键属性:安全、匿名、手提、可重复使用、用户友好</span><br><span class="line">Key Properties：Secure、 Anonymous、Portable、Reusable 、User-friendly </span><br><span class="line"></span><br><span class="line">安全需求：1.不可伪造性 2.私密性 3.不可否认性</span><br><span class="line"></span><br><span class="line">追踪</span><br><span class="line">1.现金追踪：如果一个可疑者支取现金，该现金可被撤销匿名并在存款时识别出</span><br><span class="line">2.属主追踪：如果一个可疑者存款，该现金可被撤销匿名并揭示出属主</span><br></pre></td></tr></table></figure>
+
+<h2 id="Secure-Multiparty-Computation-安全多方计算"><a href="#Secure-Multiparty-Computation-安全多方计算" class="headerlink" title="Secure Multiparty Computation(安全多方计算)"></a>Secure Multiparty Computation(安全多方计算)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">安全多方协议：在这个协议中，一群人可以在一起用一种特殊的方法计算含有许多变量的任何函数。这一群中的每一个人都知道这个函数的值，淡出了函数输出的明显东西外，没有人知道关于任何其他成员输入的任何消息。</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2018/08/02/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%9F%B9%E8%AE%AD%E7%9A%84web%E9%A2%98/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">记一次培训的web题</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2018/07/04/protocols/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Authentication protocols</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Camser</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.0</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

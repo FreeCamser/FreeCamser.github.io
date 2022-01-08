@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="一个小白进阶的历程">
+    <meta name="author" content="Camser">
+    
+    <title>
+        
+        Camser&#39;s Blog
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-Hans"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Misaka.jpg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.0"};
+    KEEP.language_ago = undefined;
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Camser&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2018/04/30/%E5%85%B3%E4%BA%8Ejwt(json%20web%20token)%E7%9A%84%E6%8E%A2%E7%A9%B6/">
+                        关于jwt(json web token)的探究
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        JWT昨天刚结束全国大学生信息安全竞赛，从中吸取到一些竞赛，该文是由一道web题思路偏移引发的探究。
+前言首先拿到web题目，依旧是熟悉的登录注册界面…
+开始尝试先注册一下，登陆进去…就只有如下界面
+然后猜想…嗯，应该就是admin的弱口令了，我开始...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Apr 30 2018 15:03:31 GMT+0800">2018-04-30</span></span>
+        
+        
+    </div>
+
+    <a href="/2018/04/30/%E5%85%B3%E4%BA%8Ejwt(json%20web%20token)%E7%9A%84%E6%8E%A2%E7%A9%B6/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2018/04/17/%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/">
+                        DDCTF misc部分题解
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        DDCTF misc做了三四天的题，就做出几道misc题目，可以说是心态大崩，肝不动了，遂来此总结一哈…
+签到题emmmm flag在公告中发出来了,嗯…不用解码的，直接提交就行(这里有好多小伙伴还去尝试解码hhh)
+(╯°□°）╯︵ ┻━┻d4e8...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Apr 17 2018 20:42:45 GMT+0800">2018-04-17</span></span>
+        
+        
+    </div>
+
+    <a href="/2018/04/17/%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2018/04/08/web%E5%AE%89%E5%85%A8%E6%9D%82%E8%AE%B0/">
+                        web安全杂记
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        md5碰撞前段时间的强网杯，被虐的遍体鳞伤，web签到硬是没签出来，就因为不知道md5碰撞。今天总结一哈。主要用到这个工具，fastcoll_v1.0.0.5.exe ，网上搜一下，很多相关教程。
+
+按照如图命令可以产生两个md5值相同的文件。我们可...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Apr 08 2018 19:59:52 GMT+0800">2018-04-08</span></span>
+        
+        
+    </div>
+
+    <a href="/2018/04/08/web%E5%AE%89%E5%85%A8%E6%9D%82%E8%AE%B0/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2018/04/07/challenge2-0/">
+                        Slove me challenge2.0
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Slove me challengeURL filtering123456789101112131415161718192021222324252627282930&lt;?php    error_reporting(0);    require ...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Apr 07 2018 19:12:39 GMT+0800">2018-04-07</span></span>
+        
+        
+    </div>
+
+    <a href="/2018/04/07/challenge2-0/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2018/03/28/challenge/">
+                        Slove me challenge
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Slove me challenge大佬推荐的代码审计练习平台http://solveme.peng.kr/chall
+Warm up123456789101wMDEyY2U2YTY0M2NgMTEyZDQyMjAzNWczYjZgMWI4NTt3Y...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 28 2018 21:14:04 GMT+0800">2018-03-28</span></span>
+        
+        
+    </div>
+
+    <a href="/2018/03/28/challenge/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2018/03/26/%E5%AE%89%E6%81%92%E6%9C%88%E8%B5%9B%E4%B9%8B%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/">
+                        安恒月赛之流量分析
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        流量分析题目内容
+题目一wireshark打开流量包，首先过滤出http协议，一般web应用比较容易分析。大体浏览一下，发现X-Forward-For和wvs，意思指纹。上网查了一下wvs指纹。wvs指纹：http://www.freebuf.com...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Mar 26 2018 21:10:19 GMT+0800">2018-03-26</span></span>
+        
+        
+    </div>
+
+    <a href="/2018/03/26/%E5%AE%89%E6%81%92%E6%9C%88%E8%B5%9B%E4%B9%8B%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2018/03/18/sql%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/">
+                        sql宽字节注入漏洞
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        sql宽字节注入漏洞
+宽字符是指两个字节宽度的编码技术，如UNICODE、GBK、BIG5等。当mysql数据库数据正在处理和存储过程中，涉及的字符集相关信息包括：1.character_set_client:客户端发送过来的SQL语句编码，也就是P...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Mar 18 2018 13:59:59 GMT+0800">2018-03-18</span></span>
+        
+        
+    </div>
+
+    <a href="/2018/03/18/sql%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2018/03/15/php%E5%BC%B1%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/">
+                        php弱类型总结
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        php弱类型总结符号比较
+php中有两种比较符号==和===
+
+1234&lt;?php $a = $b ; $a===$b ; ?&gt;
+
+===在比较时，会先判断这两种字符串的类型是否相等，再比较。==在进行比较的时候，会先将字符串类型转化成相...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Mar 15 2018 21:04:07 GMT+0800">2018-03-15</span></span>
+        
+        
+    </div>
+
+    <a href="/2018/03/15/php%E5%BC%B1%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2018/03/15/javascript%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A02-0/">
+                        javascript基础学习2.0
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        JavaScript正则表达式语法12345方法一：var reg=/pattern/方法二：var reg=new RegExp(pattern);
+RegExp对象的常用的方法
+exec(str):检索字符串中指定的值，返回找到的值，并确定其位置...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Mar 15 2018 15:07:49 GMT+0800">2018-03-15</span></span>
+        
+        
+    </div>
+
+    <a href="/2018/03/15/javascript%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A02-0/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2018/03/15/javascript%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A01-0/">
+                        javascript基础学习1.0
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        JavaScriptHTML嵌入JavaScript的代码方式
+1.使用JavaScript：前缀构建执行JavaScript代码2.使用&lt;script…/&gt;标签来包含JavaScript代码
+
+123456789&lt;body&gt;...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Mar 15 2018 13:31:37 GMT+0800">2018-03-15</span></span>
+        
+        
+    </div>
+
+    <a href="/2018/03/15/javascript%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A01-0/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+    </ul>
+
+    <div class="home-paginator">
+        <div class="paginator">
+    
+        <a class="prev btn"
+           href="/page/2/"
+        >上一页</a>
+    
+
+    
+        <a class="next btn"
+           href="/page/4/"
+        >下一页</a>
+    
+</div>
+
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Camser</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.0</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="一个小白进阶的历程">
+    <meta name="author" content="Camser">
+    
+    <title>
+        
+            Authentication protocols |
+        
+        Camser&#39;s Blog
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-Hans"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Misaka.jpg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.0"};
+    KEEP.language_ago = undefined;
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Camser&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Authentication protocols</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Misaka.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Camser</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2018-07-04 14:59:10
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE/">安全协议</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>又到了学期末啦！时间过得好快，进入了考试周，近期会将复习内容总结到博客上，今天的主题的安全协议.<br>因为是双语课，教材是纯英文的，所以我会以英汉双语的形式总结知识点.</p>
+<h1 id="Authentication-protocols-认证协议"><a href="#Authentication-protocols-认证协议" class="headerlink" title="Authentication protocols(认证协议)"></a>Authentication protocols(认证协议)</h1><h2 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Alice必须向Bob证明自己的身份，同时也可以要求Bob证明自己的身份(相互认证).</span><br><span class="line">可能需要建立会话密钥，也有其他要求，如使用公钥、使用对称密钥、使用哈希函数.</span><br><span class="line"></span><br><span class="line">Alice must prove her identity to Bob</span><br><span class="line">	Alice and Bob can be humans or computers</span><br><span class="line"></span><br><span class="line">May also require Bob to prove he’s Bob (mutual authentication)</span><br><span class="line"></span><br><span class="line">May also need to establish a session key</span><br><span class="line"></span><br><span class="line">May have other requirements, such as</span><br><span class="line">    Use only public keys</span><br><span class="line">    Use only symmetric keys</span><br><span class="line">    Use only a hash function</span><br><span class="line">    Anonymity, plausible deniability, etc., etc.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">独立计算机上的身份验证相对简单，“安全路径”是主要问题，主要担心的是对身份验证软件的攻击.</span><br><span class="line">通过网络进行身份验证要复杂得多,攻击者可以被动地观察消息,攻击者可以重播消息,可能存在主动攻击（插入，删除，更改消息）</span><br><span class="line"></span><br><span class="line">Authentication on a stand-alone computer is relatively simple</span><br><span class="line">	“Secure path” is the primary issue</span><br><span class="line">	Main concern is an attack on authentication software</span><br><span class="line"></span><br><span class="line">Authentication over a network is much more complex</span><br><span class="line">	Attacker can passively observe messages</span><br><span class="line">	Attacker can replay messages</span><br><span class="line">	Active attacks may be possible (insert, delete, change messages)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Simple-Authentication"><a href="#Simple-Authentication" class="headerlink" title="Simple Authentication"></a>Simple Authentication</h2><p>Alice向Bob发送“I’m Alice”，Bob要求Alice证明其身份，Alice发送给Bob自己的密码，Bob验证是否正确.</p>
+<p>该认证，对于独立系统可能没问题，但是网络系统下会有很大的问题，会受到重放攻击.</p>
+<h2 id="Challenge-Response"><a href="#Challenge-Response" class="headerlink" title="Challenge-Response"></a>Challenge-Response</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Alice向Bob发送“I’m Alice”，Bob向Alice发送一个挑战Nonce，Alice发送给Bob h(Alice’s password, Nonce)，Bob验证是否正确.</span><br><span class="line"></span><br><span class="line">Nonce is the challenge</span><br><span class="line">The hash is the response</span><br><span class="line">Nonce prevents replay, insures freshness</span><br><span class="line">Password is something Alice knows</span><br><span class="line">Note that Bob must know Alice’s password</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Protocol-Architectures-协议架构"><a href="#Protocol-Architectures-协议架构" class="headerlink" title="Protocol Architectures(协议架构)"></a>Protocol Architectures(协议架构)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Existing Cryptographic Keys(现有的加密密钥)</span><br><span class="line">Method of Session Key Generation(会话密钥生成方法)</span><br><span class="line">Number of Entities(实体数量)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Existing-Cryptographic-Keys"><a href="#Existing-Cryptographic-Keys" class="headerlink" title="Existing Cryptographic Keys"></a>Existing Cryptographic Keys</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">实体已共享可用于加密操作的密钥</span><br><span class="line">在主体拥有经认证的公钥的情况下使用离线服务器。</span><br><span class="line">使用在线服务器（即，每个主体与可信服务器共享密钥）。</span><br><span class="line"></span><br><span class="line">The entities already share a secret key that can be used for cryptographic operations</span><br><span class="line"></span><br><span class="line">An off-line server is used where the principals possess certified public keys.</span><br><span class="line"></span><br><span class="line">An on-line server is used (i.e., each principal shares a key with a trusted server).</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Method-of-Session-Key-Generation"><a href="#Method-of-Session-Key-Generation" class="headerlink" title="Method of Session Key Generation"></a>Method of Session Key Generation</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">密钥传输协议：一个用户创建或获取秘密值并将其安全地传输给其他用户</span><br><span class="line">密钥协商协议：会话密钥是所有协议用户输入的函数。</span><br><span class="line">混合协议：会话密钥是多个主体的输入函数，但不是所有用户的输入函数。</span><br><span class="line"></span><br><span class="line">Key Transport Protocol: one user creates or obtains a secret value and securely transfers it to the other users</span><br><span class="line"></span><br><span class="line">Key Agreement Protocol: the session key is a function of inputs by all protocol users.</span><br><span class="line"></span><br><span class="line">Hybrid Protocol: the session key is a function of inputs by more than one principal, but not by all users.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Number-of-Entities"><a href="#Number-of-Entities" class="headerlink" title="Number of Entities"></a>Number of Entities</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">双方密钥建立协议</span><br><span class="line">三方（三方）密钥建立协议</span><br><span class="line">基于组的协议（会议密钥协议）</span><br><span class="line"></span><br><span class="line">two-party key establishment protocol</span><br><span class="line"></span><br><span class="line">three-party (tripartite) key establishment protocol</span><br><span class="line"></span><br><span class="line">group-based protocol (conference key agreement protocol)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Protocol-Goals"><a href="#Protocol-Goals" class="headerlink" title="Protocol Goals"></a>Protocol Goals</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">隐式密钥认证: 一方确保除了特定标识的第二方（可能还有其他已识别的可信方）之外的任何其他方都不能访问特定密钥的属性。</span><br><span class="line">密钥确认: 一方确保第二方（可能是未确认的）方实际拥有特定密钥的财产。</span><br><span class="line">显式密钥验证: 隐式密钥身份验证和密钥确认都保持时获得的属性。</span><br><span class="line">经认证的密钥建立协议：经认证的密钥建立协议是提供隐式密钥认证的密钥建立协议。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Implicit Key Authentication: The property whereby one party is assured that no other party aside from a specifically identified second party (and possibly additional identified trusted parties) may gain access to a particular secret key.</span><br><span class="line"></span><br><span class="line">Key Confirmation: The property whereby one party is assured that a second (possibly unidentified) party actually has possession of a particular secret key.</span><br><span class="line"></span><br><span class="line">Explicit Key Authentication: The property obtained when both implicit key authentication and key confirmation hold.</span><br><span class="line"></span><br><span class="line">Authenticated Key Establishment Protocol : An authenticated key establishment protocol is a key establishment protocol which provides implicit key authentication.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Additional-Security-Attributes-其他安全属性"><a href="#Additional-Security-Attributes-其他安全属性" class="headerlink" title="Additional Security Attributes(其他安全属性)"></a>Additional Security Attributes(其他安全属性)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">已知（会话）密钥安全性：协议运行应该产生唯一的秘密会话密钥。 如果此密钥被泄露，它应该对其他会话密钥没有影响。</span><br><span class="line">正向保密：即使长期私钥被泄露，也不应对先前建立的会话密钥的保密性产生任何影响。</span><br><span class="line">密钥妥协假冒抵抗：如果实体A的长期私钥被泄露，攻击者就可以冒充A.但这不应该让他冒充其他实体来攻击A.</span><br><span class="line">未知密钥共享安全性：如果实体A想要使用B创建密钥，则不应该欺骗A与实体C共享密钥。</span><br><span class="line">密钥控制：两个实体都不能强制将会话密钥强制为他选择的值。</span><br><span class="line">密钥完整性：密钥完整性是密钥未被对手修改的属性，或等效地仅具有来自合法主体的输入。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Known (Session) Key Security:A protocol run should result in a unique secret session key. If this key is compromised, it should have no impact on other session keys.</span><br><span class="line"></span><br><span class="line">Forward Secrecy: Even if long-term private keys are compromised, it should not have any effect on the secrecy of previously established session keys. </span><br><span class="line"></span><br><span class="line">Key Compromise Impersonation Resistance: If entity A&#x27;s long-term private key are compromised, an adversary is able to impersonate A. But this should not enable him to impersonate other entities to A. </span><br><span class="line"></span><br><span class="line">Unknown Key Share Security: If entity A wants to create a secret key with B, it should not be possible that A is tricked into sharing a key with entity C. </span><br><span class="line"></span><br><span class="line">Key Control: Neither of the entities should be able to force the session key to a value of his choice. </span><br><span class="line"></span><br><span class="line">Key Integrity: Key integrity is the property that the key has not been modified by the adversary, or equivalently only has inputs from legitimate principals.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Key-Exchange-with-Symmetric-Cryptography-密码交换与对称密码学"><a href="#Key-Exchange-with-Symmetric-Cryptography-密码交换与对称密码学" class="headerlink" title="Key Exchange with Symmetric Cryptography (密码交换与对称密码学)"></a>Key Exchange with Symmetric Cryptography (密码交换与对称密码学)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">会话密钥: 一个特定通信会话的单独密钥</span><br><span class="line">假设Alice和Bob与KDC（Trent）共享一个秘密密钥</span><br><span class="line">协议:</span><br><span class="line">Alice要求Trent提供与Bob通信的会话密钥</span><br><span class="line">Trent生成随机会话密钥并加密随机会话密钥的两个副本，一个使用Alice的密钥，另一个使用Bob的密钥。 Trent将这两份副本发送给Alice。</span><br><span class="line">Alice解密她的会话密钥副本，并向Bob发送他的会话密钥副本</span><br><span class="line">Bob解密他的会话密钥副本</span><br><span class="line"></span><br><span class="line">Session key</span><br><span class="line">	A separate key for one particular communication session</span><br><span class="line"></span><br><span class="line">Assume Alice and Bob share a secret key with KDC (Trent)</span><br><span class="line"></span><br><span class="line">Protocol</span><br><span class="line">	Alice asks Trent for a session key to communicate with Bob</span><br><span class="line">	Trent generates a random session key and encrypts two copies of the a random session key, one with Alice’s key 	and the other with Bob’s key. Trent sends both copies to Alice.</span><br><span class="line">	Alice decrypts her copy of the session key and sends Bob his copy of the session key</span><br><span class="line">	Bob decrypts his copy of the session key</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Key-Exchange-with-Public-Key-Cryptography-密钥交换与公钥密码学"><a href="#Key-Exchange-with-Public-Key-Cryptography-密钥交换与公钥密码学" class="headerlink" title="Key Exchange with Public-Key Cryptography(密钥交换与公钥密码学)"></a>Key Exchange with Public-Key Cryptography(密钥交换与公钥密码学)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Alice从KDC获得Bob的公钥</span><br><span class="line">Alice生成随机会话密钥，使用Bob的公钥对其进行加密并将其发送给Bob</span><br><span class="line">Bob然后使用他的私钥解密Alice的消息</span><br><span class="line"></span><br><span class="line">Alice gets Bob’s public key from the KDC</span><br><span class="line"></span><br><span class="line">Alice generates a random session key, encrypts it using Bob’s public key and sends it to Bob</span><br><span class="line"></span><br><span class="line">Bob then decrypts Alice’s message using his private key</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Interlock-Protocol-联锁协议"><a href="#Interlock-Protocol-联锁协议" class="headerlink" title="Interlock Protocol (联锁协议)"></a>Interlock Protocol (联锁协议)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Alice向Bob发送了她的公钥</span><br><span class="line">Bob向Alice发送了他的公钥</span><br><span class="line">Alice使用Bob的公钥加密她的消息。 她将一半的加密邮件发送给Bob</span><br><span class="line">Bob使用Alice的公钥加密他的消息。 他将一半的加密消息发送给Alice</span><br><span class="line">Alice将另一半加密消息发送给Bob</span><br><span class="line">Bob将Alice的两个消息放在一起并用他的私钥解密。 Bob将另一半加密消息发送给Alice</span><br><span class="line">Alice将Bob的两部分消息放在一起，并用她的私钥解密</span><br><span class="line"></span><br><span class="line">Alice sends Bob her public key</span><br><span class="line"></span><br><span class="line">Bob sends Alice his public key</span><br><span class="line"></span><br><span class="line">Alice encrypts her message using Bob’s public key. She sends half of the encrypted message to Bob</span><br><span class="line"></span><br><span class="line">Bob encrypts his message using Alice’s public key. He sends half of the encrypted message to Alice</span><br><span class="line"></span><br><span class="line">Alice sends the other half of her encrypted message to Bob</span><br><span class="line"></span><br><span class="line">Bob puts the two halves of Alice’s message together and decrypts it with his private key. Bob sends the other half of his encrypted message to Alice</span><br><span class="line"></span><br><span class="line">Alice puts the two halves of Bob’s message together and decrypts it with her private key</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Key-Exchange-with-Digital-Signature-基于数字签名的密钥交换"><a href="#Key-Exchange-with-Digital-Signature-基于数字签名的密钥交换" class="headerlink" title="Key Exchange with Digital Signature(基于数字签名的密钥交换)"></a>Key Exchange with Digital Signature(基于数字签名的密钥交换)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">绕过中间人攻击</span><br><span class="line">Trent签下了Alice和Bob的公钥</span><br><span class="line">当Alice和Bob收到密钥时，每个密钥都会验证Trent的签名</span><br><span class="line"></span><br><span class="line">Circumvents man-in-the-middle attack</span><br><span class="line"></span><br><span class="line">Trent signs both Alice’s and Bob’s public keys</span><br><span class="line"></span><br><span class="line">When Alice and Bob receive the keys, each of them verifies Trent’s signature</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Key-and-Message-Transmission-密钥和消息传输"><a href="#Key-and-Message-Transmission-密钥和消息传输" class="headerlink" title="Key and Message Transmission(密钥和消息传输)"></a>Key and Message Transmission(密钥和消息传输)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">无密钥交换协议:</span><br><span class="line">	Alice生成随机会话密钥K，并使用K.EK（M）加密M.</span><br><span class="line">	Alice从数据库中获取Bob的公钥，并使用Bob的公钥加密K.EB（K）</span><br><span class="line">	Alice将加密的消息和加密的会话密钥都发送给Bob。 EK（M），EB（K）</span><br><span class="line">	Bob使用他的私钥解密Alice的会话密钥</span><br><span class="line">	Bob使用会话密钥解密Alice的消息。</span><br><span class="line">可以与数字签名，时间戳和任何其他安全协议结合使用</span><br><span class="line"></span><br><span class="line">Without key-exchange protocol</span><br><span class="line">	Alice generates a random session key, K, and encrypts M using K. EK(M).</span><br><span class="line">	Alice gets Bob’s public key from the database and encrypts K with Bob’s public key. EB(K)</span><br><span class="line">	Alice sends both the encrypted message and encrypted session key to Bob. EK(M), EB(K)</span><br><span class="line">	Bob decrypts Alice’s session key, using his private key</span><br><span class="line">	Bob decrypts Alice’s message using the session key.</span><br><span class="line"></span><br><span class="line">Can be combined with digital signatures, timestamps, and any other security protocols</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Key-and-Message-Broadcast-密钥和消息广播"><a href="#Key-and-Message-Broadcast-密钥和消息广播" class="headerlink" title="Key and Message Broadcast(密钥和消息广播)"></a>Key and Message Broadcast(密钥和消息广播)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">用于将加密消息M发送给Bob，Carol和Dave的协议:</span><br><span class="line">Alice使用随机会话密钥K加密M.EK（M）</span><br><span class="line">Alice用Bob的公钥加密K，用Carol的公钥加密K，然后用Dave的公钥加密K. EB（K），EC（K），ED（K）</span><br><span class="line">Alice广播EB（K），EC（K），ED（K），EK（M）</span><br><span class="line">只有Bob，Carol和Dave可以使用K解密K和消息</span><br><span class="line"></span><br><span class="line">A protocol to send encrypted message M to Bob, Carol, and Dave</span><br><span class="line">	Alice encrypts M using random session key K. EK(M)</span><br><span class="line">	Alice encrypts K with Bob’s public key, encrypts K with Carol’s public key, and then encrypts K with Dave’s 	public key. EB(K), EC(K), ED(K)</span><br><span class="line">	Alice broadcasts EB(K), EC(K), ED(K), EK(M)</span><br><span class="line">	Only Bob, Carol, and Dave can decrypt K and message using K</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Authentication-Using-One-way-Function-使用单向函数进行身份验证"><a href="#Authentication-Using-One-way-Function-使用单向函数进行身份验证" class="headerlink" title="Authentication Using One-way Function(使用单向函数进行身份验证)"></a>Authentication Using One-way Function(使用单向函数进行身份验证)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">协议:</span><br><span class="line">Alice向主机发送密码</span><br><span class="line">主机对密码执行单向功能，并将该值与先前存储的值进行比较</span><br><span class="line">字典攻击和盐值：</span><br><span class="line">盐值是随机密码连接的字符串</span><br><span class="line">大多数UNIX系统只使用12位盐值</span><br><span class="line"></span><br><span class="line">Protocol</span><br><span class="line">	Alice sends the host her password</span><br><span class="line">	Host performs a one-way function on the password and compares the value with the previously stored one</span><br><span class="line"></span><br><span class="line">Dictionary attack and salt</span><br><span class="line">	Salt is a random string concatenated with passwords</span><br><span class="line">	Most UNIX systems use only 12 bits of salt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2018/07/05/%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">安全协议知识点汇总</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2018/06/26/%E5%AE%89%E6%81%92%E6%9C%88%E8%B5%9Bweb%E7%AF%87/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">安恒月赛web篇</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Camser</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.0</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

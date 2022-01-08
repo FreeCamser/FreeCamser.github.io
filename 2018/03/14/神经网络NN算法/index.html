@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="一个小白进阶的历程">
+    <meta name="author" content="Camser">
+    
+    <title>
+        
+            神经网络NN算法 |
+        
+        Camser&#39;s Blog
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-Hans"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Misaka.jpg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.0"};
+    KEEP.language_ago = undefined;
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Camser&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">神经网络NN算法</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Misaka.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Camser</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2018-03-14 19:11:52
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/deep-learning/">deep learning</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="神经网络NN算法"><a href="#神经网络NN算法" class="headerlink" title="神经网络NN算法"></a>神经网络NN算法</h1><h2 id="多层向前神经网络-Multilayer-Feed-Forward-Neural-Network"><a href="#多层向前神经网络-Multilayer-Feed-Forward-Neural-Network" class="headerlink" title="多层向前神经网络(Multilayer Feed-Forward Neural Network)"></a>多层向前神经网络(Multilayer Feed-Forward Neural Network)</h2><blockquote>
+<p>1.Backpropagation被使用在多层向前神经网络上<br>  2.多层向前神经网络由以下部分组成：<br>    输入层(input layer), 隐藏层 (hidden layers), 输入层 (output layers)<br>  3.每层由单元(units)组成<br>  4.输入层(input layer)是由训练集的实例特征向量传入<br>  5.经过连接结点的权重(weight)传入下一层，一层的输出是下一层的输入<br>  6.隐藏层的个数可以是任意的，输入层有一层，输出层有一层<br>  7.每个单元(unit)也可以被称作神经结点，根据生物学来源定义<br>  8.以上成为2层的神经网络（输入层不算）<br>  8.一层中加权的求和，然后根据非线性方程转化输出<br>  9.作为多层向前神经网络，理论上，如果有足够多的隐藏层(hidden layers和足够大的训练集,可以模拟出任何方程</p>
+</blockquote>
+<p><img src="/uploads/5.png" alt="图片"></p>
+<h2 id="设计神经网络结构"><a href="#设计神经网络结构" class="headerlink" title="设计神经网络结构"></a>设计神经网络结构</h2><blockquote>
+<p> 1.使用神经网络训练数据之前，必须确定神经网络的层数，以及每层单元的个数<br>   2.特征向量在被传入输入层时通常被先标准化(normalize）到0和1之间 （为了加速学习过程）<br>   3.离散型变量可以被编码成每一个输入单元对应一个特征值可能赋的值<br>     比如：特征值A可能取三个值（a0, a1, a2), 可以使用3个输入单元来代表A<br>           如果A=a0, 那么代表a0的单元值就取1, 其他取0；<br>           如果A=a1, 那么代表a1de单元值就取1，其他取0，以此类推<br>   4.神经网络即可以用来做分类(classification）问题，也可以解决回归(regression)问题.<br>     a.对于分类问题，如果是2类，可以用一个输出单元表示（0和1分别代表2类）.如果多余2类，每一个类别用一个输出单元表示,所以输入层的单元数量通常等于类别的数量<br>     b.没有明确的规则来设计最好有多少个隐藏层,根据实验测试和误差，以及准确度来实验并改进</p>
+</blockquote>
+<h2 id="交叉验证方法-Cross-Validation"><a href="#交叉验证方法-Cross-Validation" class="headerlink" title="交叉验证方法(Cross-Validation)"></a>交叉验证方法(Cross-Validation)</h2><blockquote>
+<p>用于测试准确度的常用方法，将数据分成n份，第一次取其中一份当做测试集，其他的几份当做训练集，然后第二次去另一份当做测试集，其余用于训练集，依次进行n次。</p>
+</blockquote>
+<p><img src="/uploads/6.png" alt="图片"></p>
+<h2 id="Backpropagation算法"><a href="#Backpropagation算法" class="headerlink" title="Backpropagation算法"></a>Backpropagation算法</h2><blockquote>
+<p>1.通过迭代性的来处理训练集中的实例<br>2.对比经过神经网络后输入层预测值(predicted value)与真实值(target value)之间<br>3.反方向（从输出层=&gt;隐藏层=&gt;输入层）来以最小化误差(error)来更新每个连接的权重(weight)<br>4.算法详细介绍<br>  输入：D：数据集，l：学习率(learning rate)， 一个多层前向神经网络<br>  输入：一个训练好的神经网络(a trained neural network)<br>  a.初始化权重(weights)和偏向(bias): 随机初始化在-1到1之间，或者-0.5到0.5之间，每个单元有一个偏向<br>  b.对于每一个训练实例X，执行以下步骤：<br>  由输入层向前传送<br><img src="/uploads/7.png" alt="图片"><br>  根据误差反向传送<br><img src="/uploads/8.png" alt="图片"><br> 5.终止条件：<br>   a.权重的更新低于某个阈值<br>   b.预测的错误率低于某个阈值<br>   c.达到预设一定的循环次数</p>
+</blockquote>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2018/03/15/javascript%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A01-0/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">javascript基础学习1.0</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2018/03/07/CSS%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A03-0/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">CSS基础学习3.0</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Camser</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.0</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

