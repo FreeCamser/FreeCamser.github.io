@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="一个小白进阶的历程">
+    <meta name="author" content="Camser">
+    
+    <title>
+        
+            图像处理（opencv直方图均衡化） |
+        
+        Camser&#39;s Blog
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-Hans"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Misaka.jpg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.0"};
+    KEEP.language_ago = undefined;
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Camser&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">图像处理（opencv直方图均衡化）</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Misaka.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Camser</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2022-02-10 16:07:50
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Python/">Python</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/opencv/">opencv</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><p>将图像的所有像素点的数值，按照柱状图的形式统计出来。</p>
+<p><img src="/uploads/2022-0210-1.png" alt="2022-0210-1"></p>
+<h4 id="cv2-calcHist-images-channels-mask-histSize-ranges"><a href="#cv2-calcHist-images-channels-mask-histSize-ranges" class="headerlink" title="cv2.calcHist(images,channels,mask,histSize,ranges)"></a>cv2.calcHist(images,channels,mask,histSize,ranges)</h4><ul>
+<li>images: 原图像图像格式为 uint8 或 ﬂoat32。当传入函数时应 用中括号 [] 括来例如[img]</li>
+<li>channels: 同样用中括号括来它会告函数我们统幅图 像的直方图。如果输入图像是灰度图它的值就是 [0]如果是彩色图像 的传入的参数可以是[0-2]它们分别对应着 BGR</li>
+<li>mask: 掩模图像。统整幅图像的直方图就把它为 None。但是如果你想统图像某一分的直方图的你就制作一个掩模图像并使用它</li>
+<li>histSize:BIN 的数目，即分成多少个柱状。也应用中括号括起来</li>
+<li>ranges: 像素值范围常为 [0-256]</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;cat.jpg&#x27;</span>,<span class="number">0</span>) <span class="comment">#0表示灰度图</span></span><br><span class="line">hist = cv2.calcHist([img],[<span class="number">0</span>],<span class="literal">None</span>,[<span class="number">256</span>],[<span class="number">0</span>,<span class="number">256</span>]) <span class="comment">#[0]因为是灰度图单通道，[256]分成256个柱状。</span></span><br><span class="line">hist.shape</span><br><span class="line"><span class="comment"># (256, 1)</span></span><br><span class="line">plt.hist(img.ravel(),<span class="number">256</span>); </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/uploads/2022-0210-2.png" alt="2022-0210-2"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">&#x27;cat.jpg&#x27;</span>) </span><br><span class="line">color = (<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="comment">#opencv通道颜色顺序为BGR</span></span><br><span class="line"><span class="keyword">for</span> i,col <span class="keyword">in</span> <span class="built_in">enumerate</span>(color): </span><br><span class="line">    histr = cv2.calcHist([img],[i],<span class="literal">None</span>,[<span class="number">256</span>],[<span class="number">0</span>,<span class="number">256</span>]) </span><br><span class="line">    plt.plot(histr,color = col) </span><br><span class="line">    plt.xlim([<span class="number">0</span>,<span class="number">256</span>]) </span><br></pre></td></tr></table></figure>
+
+<p><img src="/uploads/2022-0210-3.png" alt="2022-0210-3"></p>
+<h4 id="mask操作"><a href="#mask操作" class="headerlink" title="mask操作"></a>mask操作</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建mast</span></span><br><span class="line">mask = np.zeros(img.shape[:<span class="number">2</span>], np.uint8)</span><br><span class="line"><span class="built_in">print</span> (mask.shape)</span><br><span class="line">mask[<span class="number">100</span>:<span class="number">300</span>, <span class="number">100</span>:<span class="number">400</span>] = <span class="number">255</span>  <span class="comment"># 将对象图像像素点坐标位置范围设为255</span></span><br><span class="line">cv_show(mask,<span class="string">&#x27;mask&#x27;</span>) </span><br><span class="line"><span class="comment"># (414, 500)</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;cat.jpg&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">cv_show(img,<span class="string">&#x27;img&#x27;</span>)</span><br><span class="line"></span><br><span class="line">masked_img = cv2.bitwise_and(img, img, mask=mask)<span class="comment">#与操作</span></span><br><span class="line">cv_show(masked_img,<span class="string">&#x27;masked_img&#x27;</span>)</span><br><span class="line"></span><br><span class="line">hist_full = cv2.calcHist([img], [<span class="number">0</span>], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">hist_mask = cv2.calcHist([img], [<span class="number">0</span>], mask, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">221</span>), plt.imshow(img, <span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">222</span>), plt.imshow(mask, <span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">223</span>), plt.imshow(masked_img, <span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">plt.subplot(<span class="number">224</span>), plt.plot(hist_full), plt.plot(hist_mask) <span class="comment">#将全局和mask的直方图画出对比</span></span><br><span class="line">plt.xlim([<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="/uploads/2022-0210-4.png" alt="2022-0210-4" style="zoom:200%;" />
+
+<h3 id="直方图均衡化"><a href="#直方图均衡化" class="headerlink" title="直方图均衡化"></a>直方图均衡化</h3><p>根据以下例图可知，原图像直方图像素数值差异明显，并不均衡，图像呈现亮度小，色彩弱的现象。经过直方图均衡化可以看到直方图像素数值整体均衡了，图像呈现的亮度和色彩更强了。</p>
+<p><img src="/uploads/hist_2.png" alt="hist_2"></p>
+<p><img src="/uploads/hist_3.png" alt="hist_3"></p>
+<p>基本原理为统计个像素值的个数，并根据数量计算概率，写出累计概率（累计概率是按照像素值由小到大的顺序计算概率，当前累计概率为小于等于该像素值的所有概率的和），计算均衡化后的像素值，累计概率乘以像素值区间。</p>
+<p><img src="/uploads/hist_4.png" alt="hist_4"></p>
+<h4 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原图直方图</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;clahe.jpg&#x27;</span>,<span class="number">0</span>) <span class="comment">#0表示灰度图 #clahe</span></span><br><span class="line">plt.hist(img.ravel(),<span class="number">256</span>); </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/uploads/WeChat07ff865117b3df1d1ddd310797432491.png" alt="WeChat07ff865117b3df1d1ddd310797432491"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 均衡化后的直方图</span></span><br><span class="line">equ = cv2.equalizeHist(img) </span><br><span class="line">plt.hist(equ.ravel(),<span class="number">256</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/uploads/WeChat246c6aafdeec67a16f64488309df0814.png" alt="WeChat246c6aafdeec67a16f64488309df0814"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原图和均衡化后的图像</span></span><br><span class="line">res = np.hstack((img,equ))</span><br><span class="line">cv_show(res,<span class="string">&#x27;res&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>通过对比原图和均衡化后的图像，可以明显看到图像亮度和色彩得到提升，但是出现了一个问题，图像中的人头雕像的面部细节变弱了很多，整体的像素值的均衡将原本细节很多的头部雕像稀释掉了。</p>
+<p><img src="/uploads/WeChatbe677d716883886640ba936d33c4f1e2.png" alt="WeChatbe677d716883886640ba936d33c4f1e2"></p>
+<h4 id="自适用直方图均衡化"><a href="#自适用直方图均衡化" class="headerlink" title="自适用直方图均衡化"></a>自适用直方图均衡化</h4><p>为了解决上面的问题，这里提供了一种自适用直方图均衡化的方法，即将原图分为多个部分，每个部分分别进行均衡化，然后进行边缘的调整，使其整体看起来仍然既亮度色彩提升又保留细节。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">clahe = cv2.createCLAHE(clipLimit=<span class="number">2.0</span>, tileGridSize=(<span class="number">8</span>,<span class="number">8</span>)) </span><br><span class="line">res_clahe = clahe.apply(img)</span><br><span class="line">res = np.hstack((img,equ,res_clahe))</span><br><span class="line">cv_show(res,<span class="string">&#x27;res&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/uploads/WeChatfecdf43db38b6a7218bf16e6cdd6f5bb.png" alt="WeChatfecdf43db38b6a7218bf16e6cdd6f5bb"></p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/02/09/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%88opencv%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D%EF%BC%89/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">图像处理（opencv模板匹配）</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Camser</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.0</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
