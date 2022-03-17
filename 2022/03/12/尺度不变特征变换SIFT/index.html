@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="一个小白进阶的历程">
+    <meta name="author" content="Camser">
+    
+    <title>
+        
+            尺度不变特征变换SIFT |
+        
+        Camser&#39;s Blog
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-Hans"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Misaka.jpg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.0"};
+    KEEP.language_ago = undefined;
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Camser&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">尺度不变特征变换SIFT</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Misaka.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Camser</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2022-03-12 09:24:22
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Python/">Python</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/opencv/">opencv</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="尺度不变特征变换SIFT"><a href="#尺度不变特征变换SIFT" class="headerlink" title="尺度不变特征变换SIFT"></a>尺度不变特征变换SIFT</h3><h4 id="图像尺度空间"><a href="#图像尺度空间" class="headerlink" title="图像尺度空间"></a>图像尺度空间</h4><p>在一定的范围内，无论物体是大还是小，人眼都可以分辨出来，然而计算机要有相同的能力却很难，所以要让机器能够对物体在不同尺度下有一个统一的认知，就需要考虑图像在不同的尺度下都存在的特点。</p>
+<p>尺度空间的获取通常使用高斯模糊来实现。</p>
+<p>I(x,y)为当前原图像，使用G(x,y,σ)高斯函数进行卷积，σ是标准差，控制的是卷积核的数值，σ越大，卷积核数值浮动范围越大，图像变化幅度也越大，越加模糊。</p>
+<p>目的是不仅要在清晰的图像中能够识别特征，在模糊图像中也能够识别特征。</p>
+<p><img src="/uploads/sift_3.png" alt="sift_3"></p>
+<p><img src="/uploads/sift_2.png" alt="sift_2"></p>
+<h4 id="多分辨率金字塔"><a href="#多分辨率金字塔" class="headerlink" title="多分辨率金字塔"></a>多分辨率金字塔</h4><p>使用图像金字塔进行图像缩小，例如最下面一层图像为400✖️400，倒数第二层为200✖️200，每层图像都进行高斯核进行卷积，得到5张模糊程度不同的图像。</p>
+<p><img src="/uploads/sift_4.png" alt="sift_4"></p>
+<h4 id="高斯差分金字塔（DOG）"><a href="#高斯差分金字塔（DOG）" class="headerlink" title="高斯差分金字塔（DOG）"></a>高斯差分金字塔（DOG）</h4><p>每层金字塔都有5张模糊程度不同的图像，相邻两项做差分，得到四个差分结果。</p>
+<p><img src="/uploads/sift_5.png" alt="sift_5"></p>
+<p>定义公式如下，相邻的G高斯函数做差，然后乘原图像，即为差分结果。</p>
+<p><img src="/uploads/sift_6.png" alt="sift_6"></p>
+<h4 id="DOG空间极值检测"><a href="#DOG空间极值检测" class="headerlink" title="DOG空间极值检测"></a>DOG空间极值检测</h4><p>为了寻找尺度空间的极值点，每个像素点要和其图像域（同一尺度空间）和尺度域（相邻的尺度空间）的所有相邻点进行比较，当其大于（或者小于）所有相邻点时，该点就是极值点。如下图所示，中间的检测点要和其所在图像的3×3邻域8个像素点，以及其相邻的上下两层的3×3领域18个像素点，共26个像素点进行比较。</p>
+<p><img src="/uploads/sift_7.png" alt="sift_7"></p>
+<h4 id="关键点的精确定位"><a href="#关键点的精确定位" class="headerlink" title="关键点的精确定位"></a>关键点的精确定位</h4><p>这些候选关键点是DOG空间的局部极值点，而且这些极值点均为离散的点，精确定位极值点的一种方法是，对尺度空间DoG函数进行曲线拟合，计算其极值点，从而实现关键点的精确定位。</p>
+<p>如下图所示，假设我们已得到的离散的点为极大值点相邻两个点，和极小值点相邻两个点，可以使用泰勒级数展开式进行拟合。求得拟合函数f(x)，然后使得f(x)’=0，求得 真正的极值点x。</p>
+<p><img src="/uploads/sift_8.png" alt="sift_8"></p>
+<p>上述使用泰勒展开进行拟合的是一维数据，同理我们进行DOG空间的三维数据进行拟合。得到如下公式D(x),使得D(x)’=0，求得Δx</p>
+<p><img src="/uploads/sift_9.png" alt="sift_9"></p>
+<h4 id="消除边界响应"><a href="#消除边界响应" class="headerlink" title="消除边界响应"></a>消除边界响应</h4><p>与角点检测类似，进行判别边界，α/β&gt;10则判定为边界。</p>
+<p><img src="/uploads/sift_10.png" alt="sift_10"></p>
+<h4 id="特征值的主方向"><a href="#特征值的主方向" class="headerlink" title="特征值的主方向"></a>特征值的主方向</h4><p>将得到的特征点转换为向量，如下公式求的向量的模和方向。</p>
+<img src="/uploads/sift_11.png" alt="sift_11" style="zoom: 67%;" />
+
+<p>每个特征点可以得到三个信息(x,y,σ,θ)，即位置、尺度和方向。具有多个方向的关键点可以被复制成多份，然后将方向值分别赋给复制后的特征点，一个特征点就产生了多个坐标、尺度相等，但是方向不同的特征点。</p>
+<h4 id="生成特征描述"><a href="#生成特征描述" class="headerlink" title="生成特征描述"></a>生成特征描述</h4><p>在完成关键点的梯度计算后，使用直方图统计邻域内像素的梯度和方向。将方向分为八个每隔45度为一个方向区间，分别为0-45、45-90…</p>
+<p>根据统计邻域内哪个方向区间占比最高，即为主方向，假设还有一个和主方向占比相近的方向(论文中给出的比例为80%)，可以将关键点进行拆分为两个方向。</p>
+<p><img src="/uploads/sift_12.png" alt="sift_12"></p>
+<p>为了保证特征矢量的旋转不变性，要以特征点为中心，在附近邻域内将坐标轴旋转θ角度，即将坐标轴旋转为特征点的主方向。如下公式为坐标系转换。</p>
+<p><img src="/uploads/sift_14.png" alt="sift_14"></p>
+<p>旋转之后的主方向为中心取8x8的窗口，求每个像素的梯度幅值和方向，箭头方向代表梯度方向，长度代表梯度幅值，然后利用高斯窗口对其进行加权运算，最后在每个4x4的小块上绘制8个方向的梯度直方图，计算每个梯度方向的累加值，即可形成一个种子点，即每个特征的由4个种子点组成，每个种子点有8个方向的向量信息。4✖️8=32维向量</p>
+<img src="/uploads/sift_15.png" alt="sift_15" style="zoom: 67%;" />
+
+<p>论文中建议对每个关键点使用4x4共16个种子点来描述，这样一个关键点就会产生128维的SIFT特征向量。 论文中建议对每个关键点使用4x4共16个种子点来描述，这样一个关键点就会产生128维的SIFT特征向量。 </p>
+<p><img src="/uploads/sift_17.png" alt="sift_17"></p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;test_1.jpg&#x27;</span>)</span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"><span class="comment">#得到特征点</span></span><br><span class="line">sift = cv2.xfeatures2d.SIFT_create()</span><br><span class="line">kp = sift.detect(gray, <span class="literal">None</span>) <span class="comment">#kp为关键点</span></span><br><span class="line">img = cv2.drawKeypoints(gray, kp, img) <span class="comment">#在原图中绘制关键点</span></span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;drawKeypoints&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"><span class="comment">#计算特征</span></span><br><span class="line">kp, des = sift.compute(gray, kp) <span class="comment">#kp为关键点，des为每个关键点的特征</span></span><br><span class="line"><span class="built_in">print</span> (np.array(kp).shape) <span class="comment">#(6811,)</span></span><br><span class="line"></span><br><span class="line">des.shape <span class="comment">#(6811, 128) #每个关键点转换为128位特征向量</span></span><br><span class="line"></span><br><span class="line">des[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<img src="/uploads/WeChatba1e10da19a4406a4fb7e834af880683.png" alt="WeChatba1e10da19a4406a4fb7e834af880683" style="zoom: 33%;" />
+
+<img src="/uploads/WeChata08432b4a0495b449956971857d7c938.png" alt="WeChata08432b4a0495b449956971857d7c938" style="zoom: 33%;" />
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/03/09/Harris%E8%A7%92%E7%82%B9%E6%A3%80%E6%B5%8B/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Harris角点检测</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Camser</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.0</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
