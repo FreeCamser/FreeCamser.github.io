@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="一个小白进阶的历程">
+    <meta name="author" content="Camser">
+    
+    <title>
+        
+            基于颜色特征的目标检测 |
+        
+        Camser&#39;s Blog
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-Hans"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Misaka.jpg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.0"};
+    KEEP.language_ago = undefined;
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Camser&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">基于颜色特征的目标检测</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Misaka.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Camser</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2022-03-22 10:20:39
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Python/">Python</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/opencv/">opencv</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="基于颜色特征的目标检测"><a href="#基于颜色特征的目标检测" class="headerlink" title="基于颜色特征的目标检测"></a>基于颜色特征的目标检测</h3><h4 id="RGB"><a href="#RGB" class="headerlink" title="RGB"></a>RGB</h4><p>RGB 是我们接触最多的颜色空间，由三个通道表示一幅图像，分别为红色(R)，绿色(G)和蓝色(B)。这三种颜色的不同组合可以形成几乎所有的其他颜色。</p>
+<p>RGB 颜色空间利用三个颜色分量的线性组合来表示颜色，任何颜色都与这三个分量有关，而且这三个分量是高度相关的，所以连续变换颜色时并不直观，想对图像的颜色进行调整需要更改这三个分量才行。</p>
+<p>自然环境下获取的图像容易受自然光照、遮挡和阴影等情况的影响，即对亮度比较敏感。而 RGB 颜色空间的三个分量都与亮度密切相关，即只要亮度改变，三个分量都会随之相应地改变，而没有一种更直观的方式来表达。</p>
+<p>在RGB颜色空间中，任意色光F都可以用R、G、B三色不同分量的相加混合而成：F=r[R]+r[G]+r[B]。RGB色彩空间还可以用一个三维的立方体来描述。当三基色分量都为0(最弱)时混合为黑色光；当三基色都为k(最大，值由存储空间决定)时混合为白色光。</p>
+<img src="/uploads/536358-20170318083044510-544926603.jpg" alt="536358-20170318083044510-544926603" style="zoom: 50%;" />
+
+<h4 id="HSV"><a href="#HSV" class="headerlink" title="HSV"></a>HSV</h4><p>在图像处理中使用较多的是 HSV 颜色空间，它比 RGB 更接近人们对彩色的感知经验。非常直观地表达颜色的色调、鲜艳程度和明暗程度，方便进行颜色的对比。</p>
+<p>在 HSV 颜色空间下，比 BGR 更容易跟踪某种颜色的物体，常用于分割指定颜色的物体。</p>
+<p>HSV 表达彩色图像的方式由三个部分组成：</p>
+<ul>
+<li><p>Hue（色调、色相）：将颜色用0°到360°表示，就是我们日常讲的颜色名称，如红色、蓝色等。</p>
+<img src="/uploads/17221499-19db837de09eab93.png" alt="17221499-19db837de09eab93" style="zoom:67%;" /></li>
+<li><p>Saturation（饱和度、色彩纯净度）：饱和度越低色彩越暗淡（0&lt;=S&lt;1）</p>
+</li>
+<li><p>Value（亮度）：数值越高越接近于白色，数值越低越接近于黑色（0&lt;=V&lt;1）</p>
+</li>
+</ul>
+<p>用下面这个圆柱体来表示 HSV 颜色空间，圆柱体的横截面可以看做是一个极坐标系 ，H 用极坐标的极角表示，S 用极坐标的极轴长度表示，V 用圆柱中轴的高度表示。</p>
+<img src="/uploads/hsv.webp" alt="hsv" style="zoom:80%;" />
+
+<h4 id="RGB与HSV联系"><a href="#RGB与HSV联系" class="headerlink" title="RGB与HSV联系"></a>RGB与HSV联系</h4><p>从上面的直观的理解，把RGB三维坐标的中轴线立起来，并扁化，就能形成HSV的锥形模型了。</p>
+<p>max = max(R,G,B)、min = min(R,G,B)</p>
+<p>由RGB到HSV的转换：</p>
+<img src="/uploads/536358-20170320141419846-1299521890.png" alt="536358-20170320141419846-1299521890" style="zoom:150%;" />
+
+<h4 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># Reading</span></span><br><span class="line">image = cv2.imread(<span class="string">&#x27;images/water_balloons.jpg&#x27;</span>)</span><br><span class="line"><span class="comment">#converting</span></span><br><span class="line">image = cv2.cvtColor(image,cv2.COLOR_BGR2RGB) <span class="comment"># 将BGR格式转换成RGB格式</span></span><br><span class="line"><span class="comment">#copy</span></span><br><span class="line">image_copy = np.copy(image)</span><br><span class="line"></span><br><span class="line">plt.imshow(image_copy)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Splitting channels</span></span><br><span class="line"></span><br><span class="line">r = image_copy[:,:,<span class="number">0</span>]  <span class="comment">#得到红色通道</span></span><br><span class="line">g = image_copy[:,:,<span class="number">1</span>]  <span class="comment">#得到绿色通道</span></span><br><span class="line">b = image_copy[:,:,<span class="number">2</span>]  <span class="comment">#得到蓝色通道</span></span><br><span class="line"></span><br><span class="line">f, ((ax1, ax2, ax3), (ax4, ax5, ax6)) = plt.subplots(<span class="number">2</span>,<span class="number">3</span>, figsize=(<span class="number">20</span>,<span class="number">10</span>))  <span class="comment"># 确定输出2行x3列的图象，图片尺寸为20x10英寸</span></span><br><span class="line"></span><br><span class="line">ax1.set_title(<span class="string">&#x27;Red&#x27;</span>)</span><br><span class="line">ax2.set_title(<span class="string">&#x27;Green&#x27;</span>)</span><br><span class="line">ax3.set_title(<span class="string">&#x27;Blue&#x27;</span>)</span><br><span class="line">ax4.set_title(<span class="string">&#x27;Red_gray&#x27;</span>)</span><br><span class="line">ax5.set_title(<span class="string">&#x27;Green_gray&#x27;</span>)</span><br><span class="line">ax6.set_title(<span class="string">&#x27;Blue_gray&#x27;</span>)</span><br><span class="line">ax1.imshow(r)</span><br><span class="line">ax2.imshow(g)</span><br><span class="line">ax3.imshow(b)</span><br><span class="line">ax4.imshow(r, cmap=<span class="string">&#x27;gray&#x27;</span>)  <span class="comment">#显示灰度图时，记得设置cmap的值为’gray&#x27;</span></span><br><span class="line">ax5.imshow(g, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">ax6.imshow(b, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># HSV color space</span></span><br><span class="line"></span><br><span class="line">image_copy_HSV = cv2.cvtColor(image_copy, cv2.COLOR_RGB2HSV)</span><br><span class="line"></span><br><span class="line">h = image_copy_HSV[:,:,<span class="number">0</span>]</span><br><span class="line">s = image_copy_HSV[:,:,<span class="number">1</span>]</span><br><span class="line">v = image_copy_HSV[:,:,<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">f, ((ax1, ax2, ax3), (ax4, ax5, ax6)) = plt.subplots(<span class="number">2</span>,<span class="number">3</span>, figsize=(<span class="number">20</span>,<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">ax1.set_title(<span class="string">&#x27;Hue&#x27;</span>)</span><br><span class="line">ax2.set_title(<span class="string">&#x27;Saturation&#x27;</span>)</span><br><span class="line">ax3.set_title(<span class="string">&#x27;Value&#x27;</span>)</span><br><span class="line">ax4.set_title(<span class="string">&#x27;Hue_gray&#x27;</span>)</span><br><span class="line">ax5.set_title(<span class="string">&#x27;Saturation_gray&#x27;</span>)</span><br><span class="line">ax6.set_title(<span class="string">&#x27;Value_gray&#x27;</span>)</span><br><span class="line">ax1.imshow(h)</span><br><span class="line">ax2.imshow(s)</span><br><span class="line">ax3.imshow(v)</span><br><span class="line">ax4.imshow(h, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">ax5.imshow(s, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">ax6.imshow(v, cmap=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Cutting</span></span><br><span class="line">lower_RGB = np.array([<span class="number">180</span>, <span class="number">0</span>, <span class="number">100</span>])</span><br><span class="line">upper_RGB = np.array([<span class="number">255</span>, <span class="number">255</span>, <span class="number">210</span>])</span><br><span class="line"></span><br><span class="line">mask_RGB = cv2.inRange(image_copy, lower_RGB, upper_RGB) <span class="comment"># 低于lower_RGB和高于upper_RGB的值，图像值变为0，在lower_RGB～upper_RGB之间的值变成255</span></span><br><span class="line"></span><br><span class="line">image_copy_RGB = np.copy(image_copy)</span><br><span class="line"></span><br><span class="line">image_copy_RGB[mask_RGB == <span class="number">0</span>] = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>] <span class="comment"># 在原图中使mask_RGB为0的区域，像素值置为0</span></span><br><span class="line"></span><br><span class="line">plt.imshow(image_copy_RGB)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">lower_Hue = np.array([<span class="number">160</span>,<span class="number">0</span>,<span class="number">0</span>])</span><br><span class="line">high_Hue = np.array([<span class="number">180</span>,<span class="number">255</span>,<span class="number">255</span>])</span><br><span class="line"></span><br><span class="line">mask_HSV = cv2.inRange(image_copy_HSV, lower_Hue, high_Hue)</span><br><span class="line"></span><br><span class="line">image_copy_HSV = np.copy(image_copy)</span><br><span class="line"></span><br><span class="line">image_copy_HSV[mask_HSV == <span class="number">0</span>] = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">plt.imshow(image_copy_HSV)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="原图像"><a href="#原图像" class="headerlink" title="原图像"></a>原图像</h5><img src="/uploads/WeChatfbb4bc3b5661af479263398ec5d6ceef.png" alt="WeChatfbb4bc3b5661af479263398ec5d6ceef" style="zoom: 25%;" />
+
+<h5 id="RGB三通道的图像及其灰度图"><a href="#RGB三通道的图像及其灰度图" class="headerlink" title="RGB三通道的图像及其灰度图"></a>RGB三通道的图像及其灰度图</h5><img src="/uploads/WeChatc790e52498078189be44169fdecd4ad8.png" alt="WeChatc790e52498078189be44169fdecd4ad8" style="zoom:25%;" />
+
+<h5 id="HSV三通道图像及其灰度图"><a href="#HSV三通道图像及其灰度图" class="headerlink" title="HSV三通道图像及其灰度图"></a>HSV三通道图像及其灰度图</h5><img src="/uploads/WeChat5f905356732b9b732bab1497fd003d40.png" alt="WeChat5f905356732b9b732bab1497fd003d40" style="zoom:25%;" />
+
+<h5 id="基于RGB提取颜色特征"><a href="#基于RGB提取颜色特征" class="headerlink" title="基于RGB提取颜色特征"></a>基于RGB提取颜色特征</h5><img src="/uploads/WeChata805735017f506e75aa141d01dd2d0b9.png" alt="WeChata805735017f506e75aa141d01dd2d0b9" style="zoom:25%;" />
+
+<h5 id="基于HSV提取颜色特征"><a href="#基于HSV提取颜色特征" class="headerlink" title="基于HSV提取颜色特征"></a>基于HSV提取颜色特征</h5><img src="/uploads/WeChat75b960f12f8de135aaa4a606036ed419.png" alt="WeChat75b960f12f8de135aaa4a606036ed419" style="zoom:25%;" />
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/03/12/%E5%B0%BA%E5%BA%A6%E4%B8%8D%E5%8F%98%E7%89%B9%E5%BE%81%E5%8F%98%E6%8D%A2SIFT/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">尺度不变特征变换SIFT</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Camser</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.0</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
