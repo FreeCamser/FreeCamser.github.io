@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="一个小白进阶的历程">
+    <meta name="author" content="Camser">
+    
+    <title>
+        
+            图像处理之ORB算法 |
+        
+        Camser&#39;s Blog
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-Hans"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Misaka.jpg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.0"};
+    KEEP.language_ago = undefined;
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Camser&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">图像处理之ORB算法</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Misaka.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Camser</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2022-04-06 16:06:07
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Python/">Python</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/opencv/">opencv</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="图像处理之ORB算法"><a href="#图像处理之ORB算法" class="headerlink" title="图像处理之ORB算法"></a>图像处理之ORB算法</h3><p>ORB(Oriented FAST and Rotated BRIEF)于 2011 年由 Rublee 等人提出。该方法由 FAST 和 BRIEF 合并而成。这两种方法的显著特点就是快， 但缺点也很明显，那就是两者都不具备旋转不变性。ORB 不是简单的 FAST 和 BRIEF 组合， 而是增加了旋转不变性的组合。</p>
+<h4 id="FAST算法"><a href="#FAST算法" class="headerlink" title="FAST算法"></a>FAST算法</h4><p>FAST(Features from accelerated segment test)是一种角点检测方法，它可以用于对特征点的提取，并完成目标的跟踪和映射。该方法最突出的优点是它的计算效率。正如它的缩写名字， 它运行速度快，事实上它比其他著名的特征点提取方法(如 SIFT、SUSAN、Harris)都要快。而且如果应用机器学习方法，该方法能够取得更佳的效果。正因为它的快速特点，FAST 角点 检测方法非常适用于实时视频处理。</p>
+<p>FAST 角点检测方法的基本原理是使用圆周长为 16 个像素点的圆(半径为 3 的 Bresenham 圆)来判定其圆心像素 <em>P</em> 是否为角点，如下图所示。在圆周上按顺时针方向从 1 到 16 的顺序对圆周像素点进行连续编号。如果在圆周上有 <em>N</em> 个连续的像素的亮度都比圆心像素的亮度 Ip 加上阈值 <em>t</em> 还要亮，或者比圆心像素的亮度减去阈值还要暗，则圆心像素被确定为角点。因此要想成为角点，必须满足下列两个条件之一。</p>
+<p>条件1:集合<em>S</em>由圆周上<em>N</em>个连续的像素<em>x</em>组成，该集合的任意像素<em>x</em>都满足Ix &gt; Ip + <em>t</em>。 </p>
+<p>条件2:集合<em>S</em>由圆周上<em>N</em>个连续的像素<em>x</em>组成，该集合的任意像素<em>x</em>都满足Ix &lt; Ip +  <em>t</em>。</p>
+<p><em>N</em> 一般选择为 12，正好为圆周的四分之三。</p>
+<p><img src="/uploads/WeChat79f45792619ef848f0b287eadb8e414c.png" alt="WeChat79f45792619ef848f0b287eadb8e414c"></p>
+<p>在一幅图像中，非角点往往是占多数，而且非角点检测要比角点检测容易得多，因此首先剔除掉非角点将大大提高角点检测速度。</p>
+<p>由于 <em>N</em> 为 12，所以编号为 1，5，9，13 的这 4 个圆周像素点中应该至少有 3 个像素点满足角点条件，圆心才有可能是角点。因此首先检查 1 和 9 像素点，如果 I1 和 I9 在[Ip – t，Ip + t]之间，则圆心肯定不是角点，否则再检查 5 和 13 像素点。 如果这4个像素中至少有3个像素满足亮度高于Ip + t或低于Ip – t，则圆心像素有可能是角点， 这时就需要进一步检查圆周上其余像素点。在 OpenCV 中，采用了另一种方法来判断非角点， 即同时检测任意直径上两个端点像素的亮度值的方法。</p>
+<p>通过非极大值抑制的方法提高算法鲁棒性。</p>
+<p>衡量角点大小的方法是计算每个角点的角点响应值 <em>V</em>，也称为得分值。但由前面的分析过程可知，FAST 检测角点的过程中并没有计算角点响应值，因此要想进行非极大值抑制，就必须先定义角点响应值。</p>
+<p>如果 <em>N</em> 一定，我们把使 <em>P</em> 仍然是角点的最大阈值 <em>t</em> 定义为 <em>P</em> 的角点响应值。有两种方法可以确定 <em>t</em>:第一种是利用二分查找算法(binary search algorithm);另一种是迭代的方法。 OpenCV 采用的是第二种方法，具体的迭代过程为:在每一次迭代中，比较 8 个连续的圆周像 素与圆心像素之间的绝对差值，得到 8 个绝对差值中的最小值 <em>d</em>，与这 8 个连续像素两端相邻的两个圆周像素与圆心像素之间的绝对差值分别为 <em>d</em>0 和 <em>d</em>9，则该次迭代所得到的角点响应值 vi 为:</p>
+<p><img src="/uploads/WeChat42342ef00ce48fcdb701a9cf856ddd9e.png" alt="WeChat42342ef00ce48fcdb701a9cf856ddd9e"></p>
+<p>角点响应值 <em>V</em> 得到后，需要在 3×3 的邻域内比较 <em>V</em>，只保留那些比其 8 邻域都大的像素作为最终的角点。非角点的响应值定义为 0。<br> 下面总结一下 FAST 角点检测方法的具体步骤:</p>
+<p>(1)对被检测像素的 16 个圆周像素的部分像素点进行非角点的检测; </p>
+<p>(2)如果初步判断是角点，则对圆周上的全部像素点进行角点检测; </p>
+<p>(3)对角点进行非极大值抑制，最终得到角点输出。</p>
+<h5 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line">img = cv2.imread(<span class="string">&#x27;box.png&#x27;</span>,<span class="number">0</span>)</span><br><span class="line">img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)</span><br><span class="line"></span><br><span class="line">fast = cv2.FastFeatureDetector_create()</span><br><span class="line">kp = fast.detect(img,<span class="literal">None</span>)</span><br><span class="line">img2 = cv2.drawKeypoints(img, kp,<span class="literal">None</span>, color=(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>))</span><br><span class="line"></span><br><span class="line">fast.setNonmaxSuppression(<span class="number">0</span>)</span><br><span class="line">kp2 = fast.detect(img,<span class="literal">None</span>)</span><br><span class="line">img3 = cv2.drawKeypoints(img,kp2,<span class="literal">None</span>,color=(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>))</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">221</span>)</span><br><span class="line">plt.imshow(img)</span><br><span class="line">plt.subplot(<span class="number">222</span>)</span><br><span class="line">plt.imshow(img2)</span><br><span class="line">plt.subplot(<span class="number">223</span>)</span><br><span class="line">plt.imshow(img3)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>分别为原图，应用非极大值抑制的FAST算法检测特征点，未应用非极大值抑制的FAST算法检测特征点。</p>
+<p><img src="/uploads/WeChat8c70bd58bd571361ebc3399c422dbf33.png" alt="WeChat8c70bd58bd571361ebc3399c422dbf33"></p>
+<h3 id="BRIEF-算法生成图像特征描述符"><a href="#BRIEF-算法生成图像特征描述符" class="headerlink" title="BRIEF 算法生成图像特征描述符"></a>BRIEF 算法生成图像特征描述符</h3><p>BRIEF 的作用是根据一组关键点创建二进制特征向量，又称为二进制特征描述符，是仅包含 1 和 0 的特征向量。在 BRIEF 中 每个关键点由一个二进制特征向量描述，该向量一般为 128-512 位的字符串，其中仅包含 1 和 0。</p>
+<p>BRIEF算法生成特征描述符的具体步骤如下：</p>
+<p>（1）<strong>首先利用高斯核对给定图像进行平滑处理</strong>，以防描述符对高频噪点过于敏感。</p>
+<p>（2）然后对于给定关键点（例如下图猫爪上的绿点），<strong>以该关键点为中心的高斯分布中抽取一个像素，下文将该点称作关键点的一号点</strong>（下图中的蓝点），标准差为 σ。</p>
+<p><img src="/uploads/WeChat8ae8497fc726d6ba121d1a9f1cb25f7a.png" alt="WeChat8ae8497fc726d6ba121d1a9f1cb25f7a"></p>
+<p>（3）<strong>以一号点为中心的高斯分布中抽取一个像素，下文将该点称作关键点的二号点</strong>（下图中的黄点），标准差为 σ/2【这么取是因为经验表明这种选择提高了特征匹配率】。</p>
+<p><img src="/uploads/WeChata1ca68eade5e695243d10a3a793f9057.png" alt="WeChata1ca68eade5e695243d10a3a793f9057"></p>
+<p>（4）为关键点构建二进制特征描述符，方法是<strong>比较（2）和（3）得到的一号点和二号点的灰度值</strong>。如果一号点比二号点亮，则为描述符中的相应位分配值 1，否则分配值 0。</p>
+<p>（5）然后针对同一关键点<strong>选择新的一号点和二号点</strong>，比较它们的灰度并为特征向量中的下个位分配 1 或 0。（即跳转到（2）重复循环）</p>
+<p>（6）对于设定的生成不同维度的具体程序，BRIEF算法会重复（2）~（4）对应次数，产生指定长度的特征描述符。并对每一特征点重复以上算法。</p>
+<h5 id="缩放不变性"><a href="#缩放不变性" class="headerlink" title="缩放不变性"></a>缩放不变性</h5><p>为使特征满足缩放不变性， BRIEF 算法<strong>构建图像金字塔</strong>。</p>
+<p>图像金字塔是单个图像的多尺度表示法，由一系列原始图像的不同分辨率版本组成。金字塔的每个级别都由上个级别的图像下采样版本组成。下采样是指图像分辨率被降低，比如图像按照 1/2 比例下采样。因此一开始的 4x4 正方形区域现在变成 2x2 正方形。图像的下采样包含更少的像素，并且以 1/2 的比例降低大小。</p>
+<p>ORB 创建好图像金字塔后，会使用 FAST 算法从每个级别不同大小的图像中快速找到关键点。因为金字塔的每个级别由原始图像的更小版本组成，因此原始图像中的任何对象在金字塔的每个级别也会降低大小。</p>
+<p>n幅不同比例的图像提取特征点总和作为这幅图像的FAST特征点，这样的话 ORB 实现了部分缩放不变性。</p>
+<p><img src="/uploads/WeChat721f4e74ffc583fa23eb26c7becbf0a8.png" alt="WeChat721f4e74ffc583fa23eb26c7becbf0a8"></p>
+<h5 id="旋转不变性"><a href="#旋转不变性" class="headerlink" title="旋转不变性"></a>旋转不变性</h5><p>ORB的论文中提出了一种利用灰度质心法来解决这个问题，通过计算一个矩来计算特征点以r为半径范围内的质心，特征点坐标到质心形成一个向量作为该特征点的方向。我们来看看具体怎么实现灰度质心法。</p>
+<p>一个图像块（比如5x5的图像块中），对应的2x2的矩的元素表达为：</p>
+<img src="/uploads/11133696-19c0d11f1652041c.png" alt="11133696-19c0d11f1652041c" style="zoom:50%;" />
+
+<p>x，y分别为坐标值，I（x，y）为像素值</p>
+<p>而该图像窗口的质心就是：</p>
+<img src="/uploads/11133696-c986565ccd9dbbcd.png" alt="11133696-c986565ccd9dbbcd" style="zoom:50%;" />
+
+<p>m00是所有像素点的像素值的总和，m10是每个像素点的x坐标乘对应像素值的累加和，m01是每个像素点的y坐标乘对应像素值的累加和，所以灰度的质心就是对所有的位置坐标进行加权，权重就是像素值在整个图像中像素值之和的比例，最后计算出一个质心坐标。</p>
+<p>那么特征点与质心的夹角定义为FAST特征点的方向：</p>
+<p><img src="/uploads/11133696-e6bf7408c50e8ded.png" alt="11133696-e6bf7408c50e8ded"></p>
+<h3 id="rBRIEF"><a href="#rBRIEF" class="headerlink" title="rBRIEF"></a>rBRIEF</h3><p>ORB 现在使用修改后的 BRIEF 版本创建特征向量，这个修改后的 BRIEF 版本称为 rBRIEF，即 Rotation-Aware BRIEF。无论对象的方向如何，它都可以为关键点创建相同的向量，使得 ORB 算法具有旋转不变性，意味着它可以在朝着任何角度旋转的图像中检测到相同的关键点。</p>
+<p>和 BRIEF 一样 rBRIEF 首先在给定关键点周围的已界定区域中随机选择 256 个像素对，以构建 256 维的位向量。然后<strong>根据关键点的方向角度旋转这些随机像素对，使随机点的方向与关键点的一致</strong>。最后, rBRIEF 对比随机像素对的亮度并相应地分配 1 和 0 创建对应的特征向量。</p>
+<h4 id="代码演示-1"><a href="#代码演示-1" class="headerlink" title="代码演示"></a>代码演示</h4><h5 id="函数：cv2-ORB-create-nfeatures-500-scaleFactor-1-2-nlevels-8-edgeThreshold-31-firstLevel-0-WTA-K-2-scoreType-HARRIS-SCORE-patchSize-31-fastThreshold-20"><a href="#函数：cv2-ORB-create-nfeatures-500-scaleFactor-1-2-nlevels-8-edgeThreshold-31-firstLevel-0-WTA-K-2-scoreType-HARRIS-SCORE-patchSize-31-fastThreshold-20" class="headerlink" title="函数：cv2.ORB_create(nfeatures = 500, scaleFactor = 1.2, nlevels = 8, edgeThreshold = 31, firstLevel = 0,WTA_K = 2, scoreType = HARRIS_SCORE, patchSize = 31, fastThreshold = 20)"></a>函数：<strong>cv2.ORB_create(nfeatures = 500, scaleFactor = 1.2, nlevels = 8, edgeThreshold = 31, firstLevel = 0,WTA_K = 2, scoreType = HARRIS_SCORE, patchSize = 31, fastThreshold = 20)</strong></h5><ul>
+<li>nfeatures：默认500，确定要查找的最大关键点数</li>
+<li>scaleFactor：默认1.2，金字塔抽取率，必须大于1。ORB使用图像金字塔来查找要素，因此必须提供金字塔中每个图层与金字塔所具有的级别数之间的比例因子。scaleFactor = 2表示经典金字塔，其中每个下一级别的像素比前一级低4倍。大比例因子将减少发现的功能数量</li>
+<li>nlevels：默认8，金字塔等级的数量</li>
+<li>edgeThreshold：默认31，未检测到要素的边框大小。由于关键点具有特定的像素大小，因此必须从搜索中排除图像的边缘。 edgeThreshold的大小应该等于或大于patchSize参数</li>
+<li>firstLevel：默认0，此参数确定应将哪个级别视为金字塔中的第一级别。它在当前实现中应为0。通常具有统一标度的金字塔等级被认为是第一级</li>
+<li>WTA_K：默认2，用于生成定向的BRIEF描述符的每个元素的随机像素的数量。可能的值为2,3和4，其中2为默认值</li>
+<li>scoreType：默认HARRIS_SCORE(函数中用scoreType=0表示)，此参数可以设置为HARRIS_SCORE或FAST_SCORE(函数中用scoreType=1表示)。HARRIS_SCORE表示Harris角算法用于对要素进行排名。该分数仅用于保留最佳功能。 FAST_SCORE生成的关键点稍差，但计算起来要快一些</li>
+<li>patchSize：生成描述符使用区域的大小。当然，在较小的金字塔层上，由特征覆盖的感知图像区域将更大</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">img1 = cv.imread(<span class="string">&#x27;box.png&#x27;</span>)</span><br><span class="line">img2 = cv.imread(<span class="string">&#x27;box_in_scene.png&#x27;</span>)</span><br><span class="line">img1 = cv.cvtColor(img1, cv.COLOR_RGB2GRAY)</span><br><span class="line">img2 = cv.cvtColor(img2, cv.COLOR_RGB2GRAY)</span><br><span class="line">orb = cv.ORB_create(scoreType =<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">kp1, des1 = orb.detectAndCompute(img1, <span class="literal">None</span>)</span><br><span class="line">kp2, des2 = orb.detectAndCompute(img2, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">matches = bf.match(des1, des2)</span><br><span class="line"></span><br><span class="line">matches = <span class="built_in">sorted</span>(matches, key = <span class="keyword">lambda</span> x:x.distance)</span><br><span class="line"></span><br><span class="line">img3 = cv.drawMatches(img1, kp1, img2, kp2, matches[: <span class="number">20</span>], <span class="literal">None</span>, flags=<span class="number">2</span>)</span><br><span class="line">plt.imshow(img3), plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/uploads/WeChate0dfbe9ede97c5445a38f2124070d157.png" alt="WeChate0dfbe9ede97c5445a38f2124070d157"></p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/03/30/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E4%B9%8B%E7%89%B9%E5%BE%81%E5%8C%B9%E9%85%8D/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">图像处理之特征匹配</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Camser</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.0</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/header-shrink.js"></script><script src="/js/back2top.js"></script><script src="/js/dark-light-toggle.js"></script>
+
+
+    <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
